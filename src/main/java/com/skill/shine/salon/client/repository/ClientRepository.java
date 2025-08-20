@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * Example: UserRepository, AppointmentRepository
  */
-public interface ClientRepository extends JpaRepository<Object, Long> {
+public interface ClientRepository   {
     // Placeholder
 }

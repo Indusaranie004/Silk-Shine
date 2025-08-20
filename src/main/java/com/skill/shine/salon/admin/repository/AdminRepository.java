@@ -3,6 +3,6 @@ package com.skill.shine.salon.admin.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AdminRepository extends JpaRepository<Object, Long> {
+public interface AdminRepository  {
     // Placeholder
 }

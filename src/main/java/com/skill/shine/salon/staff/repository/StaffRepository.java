@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * Example: StaffRepository
  */
-public interface StaffRepository extends JpaRepository<Object, Long> {
+public interface StaffRepository {
     // Placeholder
 }
