@@ -6,6 +6,7 @@ import com.skill.shine.salon.user.dto.ProfileResponse;
 public interface ProfileService {
 
     public ProfileResponse createProfile(ProfileRequest request);
+    public void validateProfileRequest(ProfileRequest request);
 
 
 

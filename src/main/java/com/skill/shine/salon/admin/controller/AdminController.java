@@ -9,13 +9,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1.0/admin")
 @RequiredArgsConstructor
 public class AdminController {
 
     private final ProfileService profileService;
 
-    @PostMapping("/register")
+    @PostMapping("admin/register")
     @ResponseStatus(HttpStatus.CREATED)
     public ProfileResponse register(@RequestBody ProfileRequest request) {
         // Role already set by frontend, just validate it's ADMIN

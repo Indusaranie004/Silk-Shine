@@ -9,13 +9,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1.0/staff")
 @RequiredArgsConstructor
 public class StaffController {
 
     private final ProfileService profileService;
 
-    @PostMapping("/register")
+    @PostMapping("staff/register")
     @ResponseStatus(HttpStatus.CREATED)
     public ProfileResponse register(@RequestBody ProfileRequest request) {
         if (!"STAFF".equals(request.getRole())) {
