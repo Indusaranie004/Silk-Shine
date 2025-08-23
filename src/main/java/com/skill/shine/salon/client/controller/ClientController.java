@@ -16,6 +16,8 @@ public class ClientController {
     private final ProfileService profileService;
     private final emailservice EmailService;
 
+    // Register new client
+
     @PostMapping("client/register")
     @ResponseStatus(HttpStatus.CREATED)
     public ProfileResponse register(@RequestBody ProfileRequest request) {

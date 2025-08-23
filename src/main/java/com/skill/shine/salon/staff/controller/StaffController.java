@@ -14,6 +14,8 @@ public class StaffController {
 
     private final ProfileService profileService;
 
+    // Register new staff
+
     @PostMapping("staff/register")
     @ResponseStatus(HttpStatus.CREATED)
     public ProfileResponse register(@RequestBody ProfileRequest request) {
