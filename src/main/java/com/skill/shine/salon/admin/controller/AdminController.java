@@ -14,6 +14,8 @@ public class AdminController {
 
     private final ProfileService profileService;
 
+    // Register new admin
+
     @PostMapping("admin/register")
     @ResponseStatus(HttpStatus.CREATED)
     public ProfileResponse register(@RequestBody ProfileRequest request) {
