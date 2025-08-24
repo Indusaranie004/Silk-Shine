@@ -19,7 +19,7 @@ public class AdminController {
     @PostMapping("admin/register")
     @ResponseStatus(HttpStatus.CREATED)
     public ProfileResponse register(@RequestBody ProfileRequest request) {
-        // Role already set by frontend, just validate it's ADMIN
+        // Role already set by frontend, just validate its ADMIN
         if (!"ADMIN".equals(request.getRole())) {
             throw new IllegalArgumentException("Invalid role for admin registration");
         }
