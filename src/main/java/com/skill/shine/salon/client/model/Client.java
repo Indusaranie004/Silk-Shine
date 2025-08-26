@@ -6,6 +6,9 @@ package com.skill.shine.salon.client.model;
  *
  * Example: User entity (for login, registration)
  */
-public class ClientModel {
+
+
+public class Client {
     // Placeholder
+
 }
