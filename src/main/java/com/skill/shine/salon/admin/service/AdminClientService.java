@@ -52,10 +52,16 @@ public class AdminClientService {
     }
 
 
-    // Delete client by ID
-    public void deleteClient(Long id) {
-        userRepository.deleteById(id);
+    // Delete client by UserId
+    public void deleteClientByUserId(String userId) {
+        List<UserEntity> users = userRepository.findByUserIdAndRole(userId, "CLIENT");
+        if (users.isEmpty()) {
+            throw new RuntimeException("Client not found");
+        }
+        userRepository.delete(users.get(0)); // delete the first match
     }
+
+
 
 
 

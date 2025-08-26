@@ -37,15 +37,16 @@ public class AdminClientController {
     }
 
 
-    // DELETE client by ID
-    @DeleteMapping("/clients/{id}")
-    public ResponseEntity<String> deleteClient(@PathVariable Long id) {
-        adminClientService.deleteClient(id);
+    // DELETE client by UserId
+    @DeleteMapping("/clients/{userId}")
+    public ResponseEntity<String> deleteClient(@PathVariable String userId) {
+        adminClientService.deleteClientByUserId(userId);
         return ResponseEntity.ok("Client deleted successfully");
     }
 
 
-    }
+
+}
 
 
 
