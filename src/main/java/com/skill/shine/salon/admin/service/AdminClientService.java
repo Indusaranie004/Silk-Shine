@@ -1,35 +1,62 @@
 package com.skill.shine.salon.admin.service;
-import com.skill.shine.salon.client.model.Client;
-import com.skill.shine.salon.client.repository.ClientRepository;
+import com.skill.shine.salon.user.model.UserEntity;
+import com.skill.shine.salon.user.repositary.UserRepositary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
+import com.skill.shine.salon.admin.dto.ClientDTO;
 import java.util.stream.Collectors;
-
+import java.util.List;
 
 
 @Service
 public class AdminClientService {
 
     @Autowired
-    private ClientRepository clientRepository;
+    private UserRepositary userRepository;
 
-    // Get all regular clients
-    public List<Client> getRegularClients() {
-        return clientRepository.findAll()
+    // Get all clients
+    public List<ClientDTO> getAllClients() {
+        return userRepository.findByRole("CLIENT")
                 .stream()
-                .filter(c -> "CLIENT".equals(c.getRole()))
+                .map(user -> new ClientDTO(
+                        user.getUserId(),
+                        user.getName(),
+                        user.getEmail()
+                ))
                 .collect(Collectors.toList());
     }
 
+
     // Search clients by name
-    public List<Client> searchClientsByName(String name) {
-        return clientRepository.findByNameContainingIgnoreCaseAndRole(name, "CLIENT");
+    public List<ClientDTO> searchClientsByName(String name) {
+        return userRepository.findByNameContainingIgnoreCaseAndRole(name, "CLIENT")
+                .stream()
+                .map(user -> new ClientDTO(
+                        user.getUserId(),
+                        user.getName(),
+                        user.getEmail()
+                ))
+                .collect(Collectors.toList());
     }
 
-    //Add clients by ID
-    public void deleteClient(Long id) {
-        clientRepository.deleteById(id);
+    // Search clients by userId
+    public List<ClientDTO> searchClientsByUserId(String userId) {
+        return userRepository.findByUserIdAndRole(userId, "CLIENT")
+                .stream()
+                .map(user -> new ClientDTO(
+                        user.getUserId(),
+                        user.getName(),
+                        user.getEmail()
+                ))
+                .collect(Collectors.toList());
     }
+
+
+    // Delete client by ID
+    public void deleteClient(Long id) {
+        userRepository.deleteById(id);
+    }
+
+
 
 }

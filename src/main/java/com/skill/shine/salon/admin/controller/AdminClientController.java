@@ -1,13 +1,16 @@
 package com.skill.shine.salon.admin.controller;
+import com.skill.shine.salon.admin.dto.ClientDTO;
 import com.skill.shine.salon.admin.service.AdminClientService;
-import com.skill.shine.salon.client.model.Client;
+import com.skill.shine.salon.user.model.UserEntity;
+import com.skill.shine.salon.admin.service.AdminClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/admin")
+@RequestMapping("/admin")
 @CrossOrigin(origins = "*")
 
 public class AdminClientController {
@@ -15,36 +18,34 @@ public class AdminClientController {
     @Autowired
     private AdminClientService adminClientService;
 
-    // GET all regular clients
-    @GetMapping("/clients/regular")
-    public ResponseEntity<List<Client>> getRegularClients() {
-        try {
-            return ResponseEntity.ok(adminClientService.getRegularClients());
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().build();
-        }
+    // GET all clients
+    @GetMapping("/clients")
+    public ResponseEntity<List<ClientDTO>> getAllClients() {
+        return ResponseEntity.ok(adminClientService.getAllClients());
     }
 
     // GET search clients by name
     @GetMapping("/clients/search")
-    public ResponseEntity<List<Client>> searchClients(@RequestParam("name") String name) {
-        try {
-            return ResponseEntity.ok(adminClientService.searchClientsByName(name));
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().build();
-        }
+    public ResponseEntity<List<ClientDTO>> searchClientsByName(@RequestParam String name) {
+        return ResponseEntity.ok(adminClientService.searchClientsByName(name));
     }
 
+    // GET search clients by userId
+    @GetMapping("/clients/searchById")
+    public ResponseEntity<List<ClientDTO>> searchClientsByUserId(@RequestParam String userId) {
+        return ResponseEntity.ok(adminClientService.searchClientsByUserId(userId));
+    }
+
+
+    // DELETE client by ID
     @DeleteMapping("/clients/{id}")
     public ResponseEntity<String> deleteClient(@PathVariable Long id) {
-        try {
-            adminClientService.deleteClient(id);
-            return ResponseEntity.ok("User deleted successfully!");
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Error deleting user!");
-        }
+        adminClientService.deleteClient(id);
+        return ResponseEntity.ok("Client deleted successfully");
+    }
+
+
     }
 
 
 
-}
