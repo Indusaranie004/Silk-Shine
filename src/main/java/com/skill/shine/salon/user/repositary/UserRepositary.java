@@ -7,9 +7,20 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserRepositary extends JpaRepository<UserEntity, Long> {
+
+    // Get all clients
+    List<UserEntity> findByRole(String role);
+
+    // Search by name (partial match) and role
+    List<UserEntity> findByNameContainingIgnoreCaseAndRole(String name, String role);
+
+    // Search by userId and role
+    List<UserEntity> findByUserIdAndRole(String userId, String role);
+
 
     Optional<UserEntity> findByEmail(String email);
 
