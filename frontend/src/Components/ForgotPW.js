@@ -27,6 +27,7 @@ const ForgotPW = () => {
       setStep(2) // Move to OTP form
     } catch (error) {
       console.error("Error sending email:", error)
+      alert("Failed to send email. Please try again.")
       // Handle error (show message to user)
     }
   }
@@ -39,14 +40,21 @@ const ForgotPW = () => {
         newPassword: formData.newPassword,
         otp: formData.otp
       }
-      await UserService.resetPassword(resetData)
-      console.log("Password reset successfully")
-      // Optionally redirect to login page or show success message
+
+      const response = await UserService.resetPassword(resetData)
+
+      // ✅ Check if backend returned success
+      if (response.status === 200) {
+        alert(response.data?.message || "Password reset successfully ✅") // ✅ fixed success alert
+        window.location.href = "/login" // ✅ redirect to login page
+      } else {
+        alert(response.data?.message || "Something went wrong") // ✅ handle unexpected response
+      }
     } catch (error) {
       console.error("Error resetting password:", error)
-      // Display backend error message
-      const errorMessage = error.response?.data?.message || "Password reset failed"
-      alert(errorMessage) // Or use a better UI notification
+      const errorMessage =
+        error.response?.data?.message || "Password reset failed"
+      alert(errorMessage) // ✅ show proper error only if truly failed
     }
   }
 

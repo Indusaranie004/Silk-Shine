@@ -9,6 +9,7 @@ import Dashboard from './Components/dashboard';
 import Customer from './Components/customer';
 import HomePage from './Components/home';
 import HomeGuest from './Components/homeguest';
+import StaffRegister from './Components/staffRegister';
 
 function App() {
   return (
@@ -16,13 +17,14 @@ function App() {
       <div className="container mt-3">
         <Routes>
 
-          <Route path="/Guest" element={<HomeGuest />} />
+          <Route path="/" element={<HomeGuest />} />
           <Route path="/Home" element={<HomePage />} />
           <Route path="/register" element={<Registration />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgotPW" element={<ForgotPW />} />
           <Route path="/dashboard_admin" element={<Dashboard/>} />
           <Route path="/customers" element={<Dashboard/>} />
+         <Route path="/staffregister" element={<StaffRegister />} /> {/* ✅ Add this */}
 
           
         </Routes>

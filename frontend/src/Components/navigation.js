@@ -51,13 +51,15 @@ export default function Navigation({ showLogout = true }) {
           <Link href="/contact" className="nav-link">
             Contact
           </Link>
+          
         </Flex>
+        
                          
         {/* Logout Button - Only show when showLogout is true */}
         {showLogout && (
           <Button
             as="a"
-            href="/guest"   // Update this path to your actual logout route
+            href="/"   // Update this path to your actual logout route
             className="nav-cta"
             size="sm"
             bg="black"

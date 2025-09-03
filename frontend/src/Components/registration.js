@@ -41,7 +41,7 @@ const Registration = () => {
       setLoading(false)
 
       setTimeout(() => {
-        navigate("/guest")
+        navigate("/login")
       }, 1000)
     } catch (err) {
       console.error("Registration failed:", err.response?.data || err)
@@ -219,8 +219,8 @@ const Registration = () => {
             >
               <option value="">Select a role</option>
               <option value="CLIENT">Client</option>
-              <option value="ADMIN">Admin</option>
-              <option value="STAFF">Staff</option>
+              {/*<option value="ADMIN">Admin</option> */}
+              {/*<option value="STAFF">Staff</option> */}
             </select>
           </div>
 
@@ -235,7 +235,7 @@ const Registration = () => {
 
         <div style={styles.loginLink}>
           Already have an account?{" "}
-          <a href="/guest" style={styles.loginAnchor}>
+          <a href="/login" style={styles.loginAnchor}>
             Sign in
           </a>
         </div>

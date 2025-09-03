@@ -1,10 +1,12 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { StaffService } from "../Services/api" // 👈 fixed path (lowercase 'services')
+import { StaffService } from "../Services/api"
+import { useNavigate } from "react-router-dom"
 import "../styles/staff.css"
 
 const StaffContent = () => {
+  const navigate = useNavigate()
   const [searchTerm, setSearchTerm] = useState("")
   const [staff, setStaff] = useState([])
   const [loading, setLoading] = useState(true)
@@ -71,19 +73,21 @@ const StaffContent = () => {
   }
 
   if (loading) {
-    return <div className="loading-container">Loading staff members...</div>
+    return <div style={{ padding: "40px", textAlign: "center" }}>Loading staff members...</div>
   }
 
   return (
-    <div className="staff-content">
-      <h1 className="staff-title">Staff Members</h1>
+    <div style={{ padding: "20px" }}>
+      <h1 style={{ fontSize: "28px", marginBottom: "20px" }}>Staff Members</h1>
 
-      {error && <div className="error-message">{error}</div>}
+      {error && <div style={{ color: "red", marginBottom: "12px" }}>{error}</div>}
 
-      <div className="search-container">
-        <div className="search-input-wrapper">
+      {/* Search bar + Register button container */}
+      <div style={{ display: "flex", alignItems: "center", marginBottom: "20px", gap: "12px" }}>
+        {/* Search Input */}
+        <div style={{ position: "relative", flex: 1 }}>
           <svg
-            className="search-icon"
+            style={{ position: "absolute", top: "50%", left: "10px", transform: "translateY(-50%)" }}
             width="20"
             height="20"
             viewBox="0 0 24 24"
@@ -96,58 +100,104 @@ const StaffContent = () => {
           </svg>
           <input
             type="text"
-            className="search-input"
             placeholder="Search staff..."
             value={searchTerm}
             onChange={handleSearchChange}
+            style={{
+              width: "100%",
+              padding: "10px 12px 10px 36px",
+              border: "1px solid #ccc",
+              borderRadius: "8px",
+              fontSize: "14px",
+              outline: "none",
+            }}
           />
         </div>
+
+        {/* Register New Staff button */}
+        <button
+          style={{
+            backgroundColor: "#4a90e2",
+            color: "white",
+            padding: "10px 18px",
+            border: "none",
+            borderRadius: "8px",
+            fontSize: "14px",
+            fontWeight: "600",
+            cursor: "pointer",
+            whiteSpace: "nowrap",
+            transition: "background 0.3s ease",
+          }}
+          onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#357abd")}
+          onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#4a90e2")}
+          onClick={() => navigate("/staffregister")}
+        >
+          Register New Staff
+        </button>
       </div>
 
-      <div className="staff-list">
-        <div className="list-header">
-          <div className="header-name">Name</div>
-          <div className="header-email">Email</div>
-          <div className="header-actions"></div>
+      {/* Staff List */}
+      <div>
+        <div style={{ display: "flex", fontWeight: "bold", padding: "10px 0", borderBottom: "1px solid #ccc" }}>
+          <div style={{ flex: 1 }}>Name</div>
+          <div style={{ flex: 1 }}>Email</div>
+          <div style={{ width: "80px" }}>Actions</div>
         </div>
 
-        <div className="staff-rows">
-          {filteredStaff.length === 0 ? (
-            <div className="no-staff">
-              {searchTerm
-                ? "No staff members found matching your search."
-                : "No staff members available."}
-            </div>
-          ) : (
-            filteredStaff.map((member) => (
-              <div key={member.userId} className="staff-row">
-                <div className="staff-name">{member.name || "N/A"}</div>
-                <div className="staff-email">{member.email || "N/A"}</div>
-                <div className="staff-actions">
-                  <button
-                    className="delete-button"
-                    onClick={() => handleDelete(member.userId)}
-                    title="Delete staff member"
+        {filteredStaff.length === 0 ? (
+          <div style={{ padding: "20px", textAlign: "center", color: "#666" }}>
+            {searchTerm
+              ? "No staff members found matching your search."
+              : "No staff members available."}
+          </div>
+        ) : (
+          filteredStaff.map((member) => (
+            <div
+              key={member.userId}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                padding: "10px 0",
+                borderBottom: "1px solid #eee",
+              }}
+            >
+              <div style={{ flex: 1 }}>{member.name || "N/A"}</div>
+              <div style={{ flex: 1 }}>{member.email || "N/A"}</div>
+              <div style={{ width: "80px" }}>
+                {/* 🔹 Trash icon button for delete */}
+                <button
+                  onClick={() => handleDelete(member.userId)}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    color: "#c53030",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                  title="Delete staff member"
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   >
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <polyline points="3,6 5,6 21,6"></polyline>
-                      <path d="m19,6v14a2,2 0 0,1-2,2H7a2,2 0 0,1-2-2V6m3,0V4a2,2 0 0,1,2,2h4a2,2 0 0,1,2,2v2"></path>
-                      <line x1="10" y1="11" x2="10" y2="17"></line>
-                      <line x1="14" y1="11" x2="14" y2="17"></line>
-                    </svg>
-                  </button>
-                </div>
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                  </svg>
+                </button>
               </div>
-            ))
-          )}
-        </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   )

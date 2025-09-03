@@ -80,7 +80,7 @@ function Dashboard() {
     localStorage.removeItem('authToken')
     localStorage.removeItem('userSession')
     sessionStorage.clear()
-    window.location.href = '/guest'
+    window.location.href = '/'
   }
 
   // Handle logo click

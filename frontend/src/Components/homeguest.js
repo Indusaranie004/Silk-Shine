@@ -58,6 +58,18 @@ export default function Home() {
               Transform your look with our premium beauty treatments. Expert stylists, luxury experience, stunning results.
             </Text>
 
+            {/* Button scrolls down to services section */}
+            <Button 
+              as="a"
+              href="#get-started"
+              className="hero-cta" 
+              size="lg"
+              textDecoration="none"
+              _hover={{ bg: "#8b5cf6", color: "white", textDecoration: "none" }}
+            >
+              Unlock Your Glow
+            </Button>
+
           </Box>
         </Flex>
       </Box>
@@ -96,6 +108,7 @@ export default function Home() {
       
       {/* Get Started Section for Guests */}
       <Box 
+        id="get-started"
         className="services-preview" 
         position="relative"
         minH="600px"
