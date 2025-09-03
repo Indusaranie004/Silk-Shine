@@ -1,0 +1,157 @@
+/* Reset default margins and padding for full page coverage */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Main container styles - GRADIENT BACKGROUND APPLIED HERE */
+.forgot-password-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Background gradient covers whole page */
+  background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 50%, #cbd5e0 100%);
+  padding: 80px 40px 60px 40px;
+  font-family: Arial, sans-serif;
+}
+
+/* Form card styling - ADJUST TRANSPARENCY HERE (change 0.95 value) */
+.forgot-password-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  padding: 24px;
+  width: 100%;
+  max-width: 360px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Form title */
+.forgot-password-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  color: #2d3748;
+  margin: 0 0 20px 0;
+}
+
+/* Form styling */
+.forgot-password-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Form group container */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Input labels */
+.form-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #2d3748;
+  margin: 0;
+}
+
+/* Input fields - ADJUST HEIGHT HERE (change first padding value: 10px) */
+.form-input {
+  padding: 10px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 14px;
+  background: #f8f9fa;
+  color: #2d3748;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: #9877dfff;
+}
+
+/* Reset password button - ADJUST HEIGHT HERE (change first padding value: 12px) */
+.reset-button {
+  background: #000000;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.reset-button:hover {
+  background: #1a1a1a;
+}
+
+/* Send OTP link container */
+.send-otp-container {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+/* Clickable OTP link - COLOR SET TO #9877dfff */
+.otp-link {
+  color: #9877dfff;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.otp-link:hover {
+  text-decoration: underline;
+}
+
+/* Back to login link container */
+.back-to-login {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 14px;
+  color: #4a5568;
+}
+
+/* Back to login link - COLOR SET TO #9877dfff */
+.back-link {
+  color: #9877dfff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+  .forgot-password-container {
+    padding: 60px 20px 40px 20px;
+  }
+
+  .forgot-password-card {
+    max-width: 320px;
+    padding: 20px;
+  }
+
+  .forgot-password-title {
+    font-size: 20px;
+  }
+}
