@@ -1,0 +1,135 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.registration-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 50%, #cbd5e0 100%);
+  padding: 80px 40px 60px 40px;
+  font-family: Arial, sans-serif;
+}
+
+.registration-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  padding: 32px;
+  width: 100%;
+  max-width: 360px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.registration-title {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  color: #2d3748;
+  margin: 0 0 28px 0;
+}
+
+.registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #2d3748;
+  margin: 0;
+}
+
+.form-input {
+  padding: 12px 20px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 16px;
+  background: #f8f9fa;
+  color: #2d3748;
+}
+
+.form-input:focus {
+  border-color: #38b2ac;
+  background: #ffffff;
+}
+
+.form-select {
+  padding: 12px 20px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 16px;
+  background: #f8f9fa;
+  color: #2d3748;
+  text-align: center;
+}
+
+.form-select:focus {
+  border-color: #38b2ac;
+  background: #ffffff;
+}
+
+.signup-button {
+  background: #38b2ac;
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.signup-button:hover {
+  background: #319795;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 16px;
+  color: #4a5568;
+}
+
+.login-anchor {
+  color: #38b2ac;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-anchor:hover {
+  color: #319795;
+}
+
+@media (max-width: 480px) {
+  .registration-container {
+    padding: 60px 24px 40px 24px;
+  }
+  .registration-card {
+    padding: 20px;
+    max-width: 320px;
+  }
+  .form-input,
+  .form-select {
+    padding: 10px 16px;
+  }
+  .signup-button {
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+}

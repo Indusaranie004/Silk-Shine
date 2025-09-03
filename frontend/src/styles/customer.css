@@ -1,0 +1,205 @@
+/* Updated to match exact design layout without profile images */
+.customers-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+}
+
+/* Simplified header without add button */
+.customers-header {
+  margin-bottom: 16px;
+}
+
+.customers-title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0;
+}
+
+/* Updated search container to match design */
+.search-container {
+  margin-bottom: 24px;
+  max-width: 400px;
+}
+
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  width: 20px;
+  height: 20px;
+  color: #4a5568;
+  z-index: 1;
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px 16px 14px 48px;
+  background: #f8f9fa;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #2d3748;
+  transition: all 0.2s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #cbd5e0;
+  box-shadow: 0 0 0 3px rgba(203, 213, 224, 0.1);
+}
+
+.search-input::placeholder {
+  color: #4a5568;
+}
+
+/* Restructured customer list to match design exactly */
+.customer-list {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+}
+
+.list-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 60px;
+  gap: 24px;
+  padding: 20px 24px;
+  background: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.header-name,
+.header-email,
+.header-actions {
+  font-size: 16px;
+  font-weight: 500;
+  color: #4a5568;
+}
+
+.customer-rows {
+  max-height: calc(100vh - 300px);
+  overflow-y: auto;
+}
+
+/* Updated customer row layout without profile images */
+.customer-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 60px;
+  gap: 24px;
+  padding: 20px 24px;
+  border-bottom: 1px solid #f7fafc;
+  transition: all 0.2s ease;
+  align-items: center;
+}
+
+.customer-row:hover {
+  background: rgba(247, 250, 252, 0.8);
+}
+
+.customer-row:last-child {
+  border-bottom: none;
+}
+
+.customer-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #2d3748;
+}
+
+.customer-email {
+  font-size: 16px;
+  color: #4a5568;
+}
+
+.customer-actions {
+  display: flex;
+  justify-content: center;
+}
+
+/* Updated delete button styling to match design */
+.delete-button {
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  color: #e53e3e;
+}
+
+.delete-button:hover {
+  background: #fed7d7;
+  color: #c53030;
+}
+
+.delete-button svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Updated loading and error states */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  color: #4a5568;
+  font-size: 16px;
+}
+
+.error-message {
+  background: #fed7d7;
+  color: #9b2c2c;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #feb2b2;
+}
+
+.no-customers {
+  padding: 40px 20px;
+  text-align: center;
+  color: #4a5568;
+  font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .customers-content {
+    padding: 16px;
+  }
+
+  .customers-title {
+    font-size: 28px;
+  }
+
+  .list-header,
+  .customer-row {
+    grid-template-columns: 1fr 1fr 50px;
+    gap: 16px;
+    padding: 16px 20px;
+  }
+
+  .customer-name,
+  .customer-email,
+  .header-name,
+  .header-email {
+    font-size: 14px;
+  }
+}
