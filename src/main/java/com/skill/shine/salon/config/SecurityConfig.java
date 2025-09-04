@@ -20,6 +20,7 @@ public class SecurityConfig {
                         .requestMatchers("/auth/login", "/auth/forgot-password", "/auth/reset-password", "/*/register").permitAll()
                         .requestMatchers("/staff/").permitAll()          // display + register open for now
                         .requestMatchers("/admin/").authenticated()       // tighten as you build auth
+                        .requestMatchers("/services/**").permitAll()
                         .anyRequest().permitAll()
                 );
         return http.build();
