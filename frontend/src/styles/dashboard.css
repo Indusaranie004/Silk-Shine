@@ -1,0 +1,227 @@
+/* Dashboard Component Styles */
+
+/* Container and Layout */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 50%, #cbd5e0 100%);
+  font-family: Arial, sans-serif;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 250px;
+  background: #2d3748;
+  color: white;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 32px;
+}
+
+.nav {
+  flex: 1;
+}
+
+.nav-item {
+  padding: 12px;
+  color: #a0aec0;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  transition: all 0.2s ease;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-item-active {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+/* Updated user profile section styling */
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 24px;
+  border-top: 1px solid #4a5568;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e2e8f0;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 32px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+/* Updated page title color to match new theme */
+.page-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #2d3748;
+  margin: 0;
+}
+
+/* Updated search input styling to match new theme */
+.search-input {
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 14px;
+  background: #f8f9fa;
+  outline: none;
+  width: 300px;
+}
+
+/* Metrics Grid */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+/* Updated metric card styling to match new color theme */
+.metric-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.metric-label {
+  font-size: 14px;
+  color: #4a5568;
+  margin: 0 0 4px 0;
+}
+
+/* Updated metric value color to match new theme */
+.metric-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2d3748;
+  margin: 0;
+}
+
+/* Charts Grid */
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+/* Updated chart card styling to match new color theme */
+.chart-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Updated chart title color to match new theme */
+.chart-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 20px;
+}
+
+/* Updated chart placeholder styling with dashed border */
+.chart-placeholder {
+  height: 200px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4a5568;
+  border: 2px dashed #e2e8f0;
+}
+
+/* Full Width Chart */
+.full-width-chart {
+  margin-top: 24px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+  }
+
+  .main-content {
+    padding: 16px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Updated color theme variables to match new specifications */
+:root {
+  --primary-button: #000000;
+  --background-gradient: linear-gradient(135deg, #f7fafc 0%, #edf2f7 50%, #cbd5e0 100%);
+  --card-background: rgba(255, 255, 255, 0.95);
+  --text-primary: #2d3748;
+  --text-secondary: #4a5568;
+  --input-background: #f8f9fa;
+  --input-border: #e2e8f0;
+  --error-background: #fed7d7;
+  --error-text: #c53030;
+  --error-border: #feb2b2;
+  --link-purple: #553c9a;
+  --signup-link: #9877dfff;
+  --white: #ffffff;
+}
+
+/* Comments for Customization */
+/* 
+  To adjust card transparency: Change the alpha value in rgba(255, 255, 255, 0.95) - 0.95 = 95% opacity
+  To modify background gradient: Update the linear-gradient values in .dashboard-container
+  To change text colors: Update --text-primary and --text-secondary variables
+  To adjust input styling: Update --input-background and --input-border variables
+*/
