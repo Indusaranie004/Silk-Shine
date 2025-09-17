@@ -23,33 +23,35 @@ const Login = () => {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    console.log("Login data:", formData)
+  e.preventDefault();
 
-    try {
-      const response = await UserService.login({
-        email: formData.email,
-        password: formData.password,
-      })
+  try {
+    const response = await UserService.login({
+      email: formData.email,
+      password: formData.password,
+    });
 
-      console.log("Login success:", response.data)
+    console.log("Login success:", response.data);
 
-      // Store token
-      localStorage.setItem("user", JSON.stringify(response.data))
+    // ✅ Store UUID userId and token separately
+    localStorage.setItem("userId", response.data.userId); // UUID string
+    localStorage.setItem("token", response.data.token);   // JWT token if any
 
-      setError("")
+    setError("");
 
-      // Role-based navigation
-      const role = response.data.role
-      if (role === "ADMIN") navigate("/dashboard_admin")
-      else if (role === "STAFF") navigate("/dashboard_staff")
-      else if (role === "CLIENT") navigate("/Home")
-      else navigate("/login")
-    } catch (err) {
-      console.error("Login failed:", err)
-      setError("Incorrect email or password")
-    }
+    // Role-based navigation
+    const role = response.data.role;
+    if (role === "ADMIN") navigate("/dashboard_admin");
+    else if (role === "STAFF") navigate("/dashboard_staff");
+    else if (role === "CLIENT") navigate("/Home");
+    else navigate("/login");
+
+  } catch (err) {
+    console.error("Login failed:", err);
+    setError("Incorrect email or password");
   }
+};
+
 
   const styles = {
     container: {

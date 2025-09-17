@@ -10,6 +10,11 @@ import Customer from './Components/customer';
 import HomePage from './Components/home';
 import HomeGuest from './Components/homeguest';
 import StaffRegister from './Components/staffRegister';
+import ServiceCards from './Components/ServiceCards';
+import GuestServices from './Components/guestServices';
+import ClientProfilePage from './Components/ClientProfilePage';
+import StaffDashboard from './Components/StaffDashboard';
+ 
 
 function App() {
   return (
@@ -24,7 +29,16 @@ function App() {
           <Route path="/forgotPW" element={<ForgotPW />} />
           <Route path="/dashboard_admin" element={<Dashboard/>} />
           <Route path="/customers" element={<Dashboard/>} />
-         <Route path="/staffregister" element={<StaffRegister />} /> {/* ✅ Add this */}
+          <Route path="/staffregister" element={<StaffRegister />} /> {/* ✅ Add this */}
+          <Route path="/services" element={<ServiceCards />} />
+          <Route path="/guest-services" element={<GuestServices />} />
+          <Route path='/client-profile' element={<ClientProfilePage />} />
+          <Route path='/dashboard_staff' element={<StaffDashboard />} />
+ 
+ 
+
+ 
+
 
           
         </Routes>
