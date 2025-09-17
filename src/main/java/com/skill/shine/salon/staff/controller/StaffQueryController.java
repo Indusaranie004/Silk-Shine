@@ -44,7 +44,7 @@ public class StaffQueryController {
     }
 
     // NEW: Partial update (PATCH). Send only fields you want to change.
-    @PatchMapping("/{userId}")
+    @PutMapping("/{userId}")
     public StaffResponse updateStaff(
             @PathVariable String userId,
             @RequestBody StaffUpdateRequest request
