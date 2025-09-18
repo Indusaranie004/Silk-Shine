@@ -150,7 +150,7 @@ function StaffDashboard() {
             style={{
               marginTop: "auto",
               padding: "12px 16px",
-              background: "#e53e3e",
+              background: "#703ee5ff",
               borderRadius: "8px",
               color: "white",
               fontWeight: "600",
