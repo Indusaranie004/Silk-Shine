@@ -76,7 +76,7 @@ export default function ClientProfilePage() {
       margin: "20px",
       padding: "30px",
       borderRadius: "20px",
-      background: "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)",
+      background: "linear-gradient(135deg, #d2d7ffff 0%, #9fbcfcff 100%)",
       boxShadow: "0 15px 35px rgba(0,0,0,0.2)",
       fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
     },
@@ -123,7 +123,7 @@ export default function ClientProfilePage() {
       marginRight: "10px",
     },
     saveBtn: {
-      background: "linear-gradient(90deg, #4ade80, #16a34a)",
+      background: "linear-gradient(90deg, #544adeff, #6b16a3ff)",
       color: "white",
     },
     editBtn: {
@@ -135,7 +135,7 @@ export default function ClientProfilePage() {
       color: "#374151",
     },
     deleteBtn: {
-      background: "linear-gradient(90deg, #f87171, #dc2626)",
+      background: "linear-gradient(90deg, #f871f4ff, #340241ff)",
       color: "white",
       marginTop: "20px",
     },
