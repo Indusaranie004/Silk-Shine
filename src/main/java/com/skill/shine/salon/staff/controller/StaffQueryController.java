@@ -19,7 +19,7 @@ public class StaffQueryController {
 
     private final StaffService staffService;
 
-    /**
+    /**wh
      * List staff with pagination, sorting, and an optional search query.
      * Examples:
      *   GET /staff?page=0&size=10&sort=name,asc
@@ -44,7 +44,7 @@ public class StaffQueryController {
     }
 
     // NEW: Partial update (PATCH). Send only fields you want to change.
-    @PatchMapping("/{userId}")
+    @PutMapping("/{userId}")
     public StaffResponse updateStaff(
             @PathVariable String userId,
             @RequestBody StaffUpdateRequest request

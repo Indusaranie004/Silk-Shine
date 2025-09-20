@@ -54,8 +54,42 @@ export const ClientService = {
 
 export const StaffService = {
   getAllStaff: () => api.get('/staff'),
+    getStaffById: (userId) => api.get(`/staff/${userId}`), // ✅ add this
+
   deleteStaff: (staffID) => api.delete(`/staff/${staffID}`),  // ✅ renamed
-  updateStaff: (staffID, staffData) => api.patch(`/staff/${staffID}`, staffData)
+  updateStaff: (staffID, staffData) => api.put(`/staff/${staffID}`, staffData)
 };
+
+// src/services/api.js
+export const ServiceAPI = {
+  // Get all services
+  getAll: () => api.get('/services'),
+
+  // Create service (with image upload)
+  create: (formData) =>
+    api.post('/services', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }),
+
+  // Update service
+  update: (id, formData) =>
+    api.put(`/services/${id}`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }),
+
+  // Delete service
+  delete: (id) => api.delete(`/services/${id}`),
+
+  // Search services by category (optional)
+  searchByCategory: (category) => api.get(`/services/category/${category}`),
+}
+
+export const ClientProfileAPI = {
+  getProfile: (userId) => api.get(`/client/profile/${userId}`),
+  updateProfile: (userId, profileData) => api.put(`/client/profile/${userId}`, profileData),
+  deleteProfile: (userId) => api.delete(`/client/profile/${userId}`)
+};
+
+
 
 export default api;

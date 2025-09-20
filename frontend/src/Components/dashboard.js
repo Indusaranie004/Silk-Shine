@@ -5,6 +5,8 @@ import Logo from "../assets/images/Logo.png";
 // Import content components
 import CustomersContent from './customer'
 import StaffContent from "./staff";
+import ServicesContent from "./services";
+
 
 function Dashboard() {
   const [activeNav, setActiveNav] = useState("Dashboard")
@@ -67,7 +69,9 @@ function Dashboard() {
     { name: "Services", route: "/services", action: "navigate" },
     { name: "Appointments", route: "/appointments", action: "navigate" },
     { name: "Finance", route: "/finance", action: "navigate" },
-    { name: "Activity Log", route: "/activity-log", action: "navigate" }
+    { name: "Activity Log", route: "/activity-log", action: "navigate" },
+    { name: "Work Allocation", route: "/work-allocation", action: "navigate" }
+    
   ]
 
   // Handle navigation clicks
@@ -173,6 +177,8 @@ function Dashboard() {
           )}
           {activeNav === "Customers" && <CustomersContent />}
           {activeNav === "Staff" && <StaffContent />}
+          {activeNav === "Services" && <ServicesContent />}
+
         </div>
       </div>
     </div>
