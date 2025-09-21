@@ -6,6 +6,7 @@ import com.skill.shine.salon.booking.model.BookingEntity;
 import com.skill.shine.salon.booking.repository.BookingRepository;
 import com.skill.shine.salon.services.model.ServiceEntity;
 import com.skill.shine.salon.services.repository.ServiceRepository;
+import com.skill.shine.salon.staff.repository.StaffRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ public class BookingServiceImpl implements BookingService {
 
     private final BookingRepository bookingRepository;
     private final ServiceRepository serviceRepository;
+    private final StaffRepository staffRepository;
 
     @Override
     public BookingResponse createBooking(BookingRequest request) {
@@ -97,6 +99,15 @@ public class BookingServiceImpl implements BookingService {
     }
 
     private BookingResponse mapToResponse(BookingEntity booking) {
+        // Get staff name first if assigned
+        String assignedStaffName = null;
+        if (booking.getAssignedStaffId() != null) {
+            assignedStaffName = staffRepository.findById(booking.getAssignedStaffId())
+                    .map(staff -> staff.getUser().getName())
+                    .orElse(null);
+        }
+
+
         return BookingResponse.builder()
                 .id(booking.getId())
                 .userId(booking.getUserId())
@@ -109,6 +120,10 @@ public class BookingServiceImpl implements BookingService {
                 .date(booking.getDate())
                 .time(booking.getTime())
                 .price(booking.getPrice())
+                .assignedStaffId(booking.getAssignedStaffId())
+                .assignmentStatus(booking.getAssignmentStatus())
+                .assignedStaffName(assignedStaffName)
+
                 .build();
     }
 }

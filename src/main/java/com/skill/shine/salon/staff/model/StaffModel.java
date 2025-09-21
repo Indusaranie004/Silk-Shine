@@ -89,4 +89,5 @@ public class StaffModel {
     public void setAvailabilities(List<StaffAvailability> availabilities) {
         this.availabilities = availabilities;
     }
+
 }

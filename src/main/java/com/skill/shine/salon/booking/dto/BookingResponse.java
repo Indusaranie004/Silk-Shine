@@ -1,5 +1,6 @@
 package com.skill.shine.salon.booking.dto;
 
+import com.skill.shine.salon.booking.model.AssignmentStatus;
 import lombok.*;
 
 @Data
@@ -18,5 +19,23 @@ public class BookingResponse {
     private String date;
     private String time;
     private Double price;
+
+    // Add these fields to BookingResponse
+    private Long assignedStaffId;
+    private String assignedStaffName;
+    private AssignmentStatus assignmentStatus;
+
+    // In BookingResponse class - add this method if missing
+    public void setAssignedStaffName(String assignedStaffName) {
+        this.assignedStaffName = assignedStaffName;
+    }
+
+
+
+
+
+
+
+
 }
 
