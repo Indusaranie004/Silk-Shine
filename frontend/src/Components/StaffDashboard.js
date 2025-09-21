@@ -1,15 +1,18 @@
 "use client"
 
-import { useState } from "react"
-import Logo from "../assets/images/Logo.png";
-// Import content components
-import CustomersContent from './customer'
-import StaffContent from "./staff";
-import ServicesContent from "./services";
+import { useState, useEffect } from "react"
+import Logo from "../assets/images/Logo.png"
+import StaffProfilePage from "./StaffProfile"
 
-
-function Dashboard() {
+function StaffDashboard() {
   const [activeNav, setActiveNav] = useState("Dashboard")
+  const [staffName, setStaffName] = useState("")
+
+  // ✅ Fetch logged-in staff name from localStorage or API
+  useEffect(() => {
+    const storedName = localStorage.getItem("staffName")
+    if (storedName) setStaffName(storedName)
+  }, [])
 
   const containerStyle = {
     display: "flex",
@@ -32,7 +35,7 @@ function Dashboard() {
     color: "#2d3748",
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     padding: "0 24px",
     borderBottom: "1px solid #e2e8f0",
     boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
@@ -54,6 +57,13 @@ function Dashboard() {
     height: "100%",
   }
 
+  const navStyle = {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+  }
+
   const mainContentStyle = {
     flex: 1,
     padding: "32px",
@@ -61,17 +71,12 @@ function Dashboard() {
     maxWidth: "calc(100vw - 250px)",
   }
 
-  // Navigation items
+  // Navigation items (for staff)
   const navItems = [
-    { name: "Dashboard", route: "/dashboard", action: "navigate" },
-    { name: "Customers", route: "/customers", action: "navigate" },
-    { name: "Staff", route: "/staff", action: "navigate" },
-    { name: "Services", route: "/services", action: "navigate" },
-    { name: "Appointments", route: "/appointments", action: "navigate" },
-    { name: "Finance", route: "/finance", action: "navigate" },
-    { name: "Activity Log", route: "/activity-log", action: "navigate" },
-    { name: "Work Allocation", route: "/work-allocation", action: "navigate" }
-    
+    { name: "Dashboard" },
+    { name: "Profile" },
+    { name: "Appointments" },
+    { name: "Services" },
   ]
 
   // Handle navigation clicks
@@ -81,26 +86,16 @@ function Dashboard() {
 
   // Handle logout functionality
   function handleLogout() {
-    localStorage.removeItem('authToken')
-    localStorage.removeItem('userSession')
+    localStorage.clear()
     sessionStorage.clear()
-    window.location.href = '/'
-  }
-
-  // Handle logo click
-  function handleLogoClick() {
-    setActiveNav("Dashboard")
-    window.location.href = '/dashboard'
+    window.location.href = "/"
   }
 
   return (
     <div style={containerStyle}>
       {/* Top Header */}
       <div style={topHeaderStyle}>
-        <div 
-          style={{ display: "flex", alignItems: "center", gap: "12px", cursor: "pointer" }}
-          onClick={handleLogoClick}
-        >
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
           <img
             src={Logo}
             alt="Silk&Shine Logo"
@@ -108,48 +103,31 @@ function Dashboard() {
               maxWidth: "40px",
               maxHeight: "24px",
               objectFit: "contain",
-              transition: "all 0.2s ease",
             }}
           />
-          <span style={{ 
-            fontSize: "18px", 
-            fontWeight: "600", 
-            color: "#2d3748",
-          }}>
-            Silk&Shine
+          <span
+            style={{
+              fontSize: "18px",
+              fontWeight: "600",
+              color: "#2d3748",
+            }}
+          >
+            Silk&Shine Staff Portal
           </span>
         </div>
-
-        <button
-          style={{
-            display: "flex",
-            alignItems: "center",
-            cursor: "pointer",
-            padding: "8px 16px",
-            borderRadius: "8px",
-            transition: "all 0.2s ease",
-            background: "#000000",
-            color: "white",
-            border: "none",
-            fontSize: "14px",
-            fontWeight: "500",
-          }}
-          onClick={handleLogout}
-        >
-          Logout
-        </button>
       </div>
 
       {/* Sidebar + Content */}
       <div style={mainLayoutStyle}>
         <div style={sidebarStyle}>
-          <nav style={{ flex: 1, display: "flex", flexDirection: "column", gap: "8px" }}>
+          <nav style={navStyle}>
             {navItems.map((item) => (
               <button
                 key={item.name}
                 style={{
                   padding: "12px 16px",
-                  background: activeNav === item.name ? "rgba(255, 255, 255, 0.1)" : "transparent",
+                  background:
+                    activeNav === item.name ? "rgba(255, 255, 255, 0.1)" : "transparent",
                   borderRadius: "8px",
                   color: activeNav === item.name ? "white" : "#a0aec0",
                   cursor: "pointer",
@@ -166,23 +144,44 @@ function Dashboard() {
               </button>
             ))}
           </nav>
+
+          {/* Logout button at bottom */}
+          <button
+            style={{
+              marginTop: "auto",
+              padding: "12px 16px",
+              background: "#703ee5ff",
+              borderRadius: "8px",
+              color: "white",
+              fontWeight: "600",
+              cursor: "pointer",
+              border: "none",
+              textAlign: "center",
+            }}
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
         </div>
 
         {/* Main Content */}
         <div style={mainContentStyle}>
           {activeNav === "Dashboard" && (
             <h1 style={{ fontSize: "32px", fontWeight: "bold", color: "#2d3748" }}>
-              Dashboard
+              Welcome back, {staffName || "Staff"} 👋
             </h1>
           )}
-          {activeNav === "Customers" && <CustomersContent />}
-          {activeNav === "Staff" && <StaffContent />}
-          {activeNav === "Services" && <ServicesContent />}
-
+          {activeNav === "Profile" && <StaffProfilePage />}
+          {activeNav === "Appointments" && (
+            <h2 style={{ fontSize: "24px", fontWeight: "bold" }}>Appointments</h2>
+          )}
+          {activeNav === "Services" && (
+            <h2 style={{ fontSize: "24px", fontWeight: "bold" }}>Services</h2>
+          )}
         </div>
       </div>
     </div>
   )
 }
 
-export default Dashboard
+export default StaffDashboard

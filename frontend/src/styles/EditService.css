@@ -1,0 +1,82 @@
+.edit-service-container {
+  max-width: 500px;
+  margin: 40px auto;
+  /* Use the gradient from Dashboard */
+  background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 50%, #cbd5e0 100%);
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+
+.edit-service-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2b2d42;
+}
+
+.edit-service-form label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  font-weight: 500;
+  color: #4a4a4a;
+}
+
+.edit-service-form input[type="text"],
+.edit-service-form input[type="number"],
+.edit-service-form textarea,
+.edit-service-form input[type="file"] {
+  margin-top: 6px;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s border-color;
+}
+
+.edit-service-form input:focus,
+.edit-service-form textarea:focus {
+  border-color: #4a90e2;
+}
+
+.edit-service-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.image-preview {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-top: 8px;
+  border: 2px solid #4a90e2;
+}
+
+.update-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background: #4a90e2;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.update-btn:hover {
+  background: #357abd;
+}
+
+.loading, .error {
+  text-align: center;
+  font-size: 16px;
+  padding: 40px;
+  color: #c53030;
+}

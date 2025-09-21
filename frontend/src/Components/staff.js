@@ -13,6 +13,11 @@ const StaffContent = () => {
   const [error, setError] = useState(null)
   const [filteredStaff, setFilteredStaff] = useState([])
 
+  // 🔹 Update form states
+  const [showUpdateForm, setShowUpdateForm] = useState(false)
+  const [currentStaff, setCurrentStaff] = useState(null)
+  const [updateData, setUpdateData] = useState({ name: "", email: "" })
+
   useEffect(() => {
     fetchStaff()
   }, [])
@@ -72,6 +77,36 @@ const StaffContent = () => {
     setSearchTerm(e.target.value)
   }
 
+  // 🔹 Open update form
+  const openUpdateForm = (member) => {
+    setCurrentStaff(member)
+    setUpdateData({ name: member.name || "", email: member.email || "" })
+    setShowUpdateForm(true)
+  }
+
+  // 🔹 Update form input change
+  const handleUpdateChange = (e) => {
+    setUpdateData({ ...updateData, [e.target.name]: e.target.value })
+  }
+
+  // 🔹 Submit update
+  const handleUpdateSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      await StaffService.updateStaff(currentStaff.userId, updateData)
+      setStaff((prev) =>
+        prev.map((m) =>
+          m.userId === currentStaff.userId ? { ...m, ...updateData } : m
+        )
+      )
+      setShowUpdateForm(false)
+      setCurrentStaff(null)
+    } catch (err) {
+      console.error("Error updating staff:", err)
+      alert("Failed to update staff member")
+    }
+  }
+
   if (loading) {
     return <div style={{ padding: "40px", textAlign: "center" }}>Loading staff members...</div>
   }
@@ -82,9 +117,8 @@ const StaffContent = () => {
 
       {error && <div style={{ color: "red", marginBottom: "12px" }}>{error}</div>}
 
-      {/* Search bar + Register button container */}
+      {/* Search bar + Register button */}
       <div style={{ display: "flex", alignItems: "center", marginBottom: "20px", gap: "12px" }}>
-        {/* Search Input */}
         <div style={{ position: "relative", flex: 1 }}>
           <svg
             style={{ position: "absolute", top: "50%", left: "10px", transform: "translateY(-50%)" }}
@@ -114,7 +148,6 @@ const StaffContent = () => {
           />
         </div>
 
-        {/* Register New Staff button */}
         <button
           style={{
             backgroundColor: "#4a90e2",
@@ -141,7 +174,7 @@ const StaffContent = () => {
         <div style={{ display: "flex", fontWeight: "bold", padding: "10px 0", borderBottom: "1px solid #ccc" }}>
           <div style={{ flex: 1 }}>Name</div>
           <div style={{ flex: 1 }}>Email</div>
-          <div style={{ width: "80px" }}>Actions</div>
+          <div style={{ width: "120px" }}>Actions</div>
         </div>
 
         {filteredStaff.length === 0 ? (
@@ -163,8 +196,34 @@ const StaffContent = () => {
             >
               <div style={{ flex: 1 }}>{member.name || "N/A"}</div>
               <div style={{ flex: 1 }}>{member.email || "N/A"}</div>
-              <div style={{ width: "80px" }}>
-                {/* 🔹 Trash icon button for delete */}
+              <div style={{ width: "120px", display: "flex", gap: "8px" }}>
+                {/* ✏️ Update button */}
+                <button
+                  onClick={() => openUpdateForm(member)}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    color: "#3182ce",
+                  }}
+                  title="Edit staff member"
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M12 20h9"></path>
+                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                  </svg>
+                </button>
+
+                {/* 🗑️ Delete button */}
                 <button
                   onClick={() => handleDelete(member.userId)}
                   style={{
@@ -172,9 +231,6 @@ const StaffContent = () => {
                     border: "none",
                     cursor: "pointer",
                     color: "#c53030",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
                   }}
                   title="Delete staff member"
                 >
@@ -199,6 +255,102 @@ const StaffContent = () => {
           ))
         )}
       </div>
+
+      {/* 🔹 Popup Update Form */}
+      {showUpdateForm && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0,0,0,0.5)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1000,
+          }}
+        >
+          <div
+            style={{
+              background: "linear-gradient(135deg, #f7fafc 0%, #edf2f7 50%, #cbd5e0 100%)",
+              padding: "20px",
+              borderRadius: "12px",
+              width: "400px",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+            }}
+          >
+            <h2 style={{ marginBottom: "16px", fontSize: "20px", fontWeight: "600" }}>
+              Update Staff
+            </h2>
+
+            <form onSubmit={handleUpdateSubmit}>
+              <div style={{ marginBottom: "12px" }}>
+                <label style={{ display: "block", marginBottom: "4px" }}>Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={updateData.name}
+                  onChange={handleUpdateChange}
+                  style={{
+                    width: "100%",
+                    padding: "8px",
+                    borderRadius: "8px",
+                    border: "1px solid #ccc",
+                  }}
+                />
+              </div>
+
+              <div style={{ marginBottom: "12px" }}>
+                <label style={{ display: "block", marginBottom: "4px" }}>Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={updateData.email}
+                  onChange={handleUpdateChange}
+                  style={{
+                    width: "100%",
+                    padding: "8px",
+                    borderRadius: "8px",
+                    border: "1px solid #ccc",
+                  }}
+                />
+              </div>
+
+              <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px" }}>
+                <button
+                  type="button"
+                  onClick={() => setShowUpdateForm(false)}
+                  style={{
+                    backgroundColor: "#e53e3e",
+                    color: "white",
+                    padding: "8px 14px",
+                    border: "none",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  style={{
+                    backgroundColor: "#4a90e2",
+                    color: "white",
+                    padding: "8px 14px",
+                    border: "none",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                  }}
+                >
+                  Save
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
