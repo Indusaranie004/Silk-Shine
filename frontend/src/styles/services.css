@@ -194,3 +194,140 @@
     font-size: 14px;
   }
 }
+
+.booking-form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.booking-form {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 500px;
+}
+
+.booking-form h2 {
+  margin: 0 0 20px 0;
+  color: #2c3e50;
+  text-align: center;
+}
+
+.booking-form p {
+  text-align: center;
+  font-weight: bold;
+  color: #e74c3c;
+  margin-bottom: 20px;
+}
+
+.booking-form input,
+.booking-form select {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.form-actions {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+}
+
+.form-actions button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.form-actions button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+}
+
+.form-actions button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.cancel-btn {
+  background-color: #d42a17;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background-color: #545b62;
+}
+
+.my-bookings {
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.my-bookings h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px;
+}
+
+.bookings-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+.booking-card {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-left: 5px solid #3498db;
+}
+
+.booking-card h3 {
+  margin: 0 0 16px 0;
+  color: #2c3e50;
+}
+
+.booking-card p {
+  margin: 6px 0;
+  color: #555;
+}
+
+.actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.actions button:nth-child(1) {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.actions button:hover {
+  opacity: 0.9;
+}

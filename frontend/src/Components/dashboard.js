@@ -6,7 +6,7 @@ import Logo from "../assets/images/Logo.png";
 import CustomersContent from './customer'
 import StaffContent from "./staff";
 import ServicesContent from "./services";
-
+import AppointmentsContent from "./appointments";
 
 function Dashboard() {
   const [activeNav, setActiveNav] = useState("Dashboard")
@@ -178,7 +178,7 @@ function Dashboard() {
           {activeNav === "Customers" && <CustomersContent />}
           {activeNav === "Staff" && <StaffContent />}
           {activeNav === "Services" && <ServicesContent />}
-
+           {activeNav === "Appointments" && <AppointmentsContent />} {/* ← ADD THIS */}
         </div>
       </div>
     </div>

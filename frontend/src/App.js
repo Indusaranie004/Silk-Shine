@@ -14,7 +14,7 @@ import ServiceCards from './Components/ServiceCards';
 import GuestServices from './Components/guestServices';
 import ClientProfilePage from './Components/ClientProfilePage';
 import StaffDashboard from './Components/StaffDashboard';
- 
+import MyBookings from './Components/MyBookings';
 
 function App() {
   return (
@@ -34,6 +34,7 @@ function App() {
           <Route path="/guest-services" element={<GuestServices />} />
           <Route path='/client-profile' element={<ClientProfilePage />} />
           <Route path='/dashboard_staff' element={<StaffDashboard />} />
+          <Route path="/my-bookings" element={<MyBookings />} />
  
  
 
