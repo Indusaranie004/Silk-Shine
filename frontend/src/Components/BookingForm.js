@@ -1,8 +1,12 @@
 // src/Components/BookingForm.js
 import React, { useState } from 'react';
 import api from '../Services/api'; // ← Import from Services/api.js
+import { useNavigate } from 'react-router-dom';
+
+
 
 const BookingForm = ({ service, onClose }) => {
+  const navigate = useNavigate(); // ← ADD THIS
   const userId = localStorage.getItem('userId'); // From login
 
   const [formData, setFormData] = useState({
@@ -35,9 +39,12 @@ const BookingForm = ({ service, onClose }) => {
     };
 
     try {
-      await api.post('/bookings', bookingData);
-      alert('✅ Booking confirmed!');
-      onClose();
+     const response = await api.post('/bookings', bookingData);
+    alert('✅ Booking created successfully!');
+    
+    // ✅ Navigate to payment page with booking ID
+    navigate(`/payment/${response.data.id}`);
+    
     } catch (error) {
       console.error('Error:', error.response?.data || error.message);
       alert('❌ Failed to book. Please try again.');

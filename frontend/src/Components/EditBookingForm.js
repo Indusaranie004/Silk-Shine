@@ -64,7 +64,7 @@ const EditBookingForm = ({ bookingId, onClose }) => {
   return (
     <div className="booking-form-overlay">
       <div className="booking-form">
-        <h2>Edit Booking #{bookingId}</h2>
+        <h2>Edit Booking </h2>
         <form onSubmit={handleSubmit}>
           <input name="name" placeholder="Full Name" value={formData.name} onChange={handleChange} required />
           <input name="email" type="email" placeholder="Email" value={formData.email} onChange={handleChange} required />

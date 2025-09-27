@@ -97,7 +97,7 @@ const MyBookings = () => {
                   <button
                     onClick={() => handleEdit(booking)}
                     style={{
-                      backgroundColor: "#f6ad55",
+                      backgroundColor: "#8b5cf6",
                       color: "white",
                       border: "none",
                       padding: "8px 16px",
@@ -110,7 +110,7 @@ const MyBookings = () => {
                   <button
                     onClick={() => handleDelete(booking.id)}
                     style={{
-                      backgroundColor: "#e53e3e",
+                      backgroundColor: "#0c0c0cff",
                       color: "white",
                       border: "none",
                       padding: "8px 16px",

@@ -103,7 +103,7 @@ const AppointmentsContent = () => {
                         setShowAssignModal(true);
                       }}
                       style={{
-                        backgroundColor: "#4a90e2",
+                        backgroundColor: "#8b5cf6",
                         color: "white",
                         border: "none",
                         padding: "6px 12px",

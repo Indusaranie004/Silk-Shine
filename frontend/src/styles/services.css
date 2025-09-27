@@ -226,7 +226,7 @@
 .booking-form p {
   text-align: center;
   font-weight: bold;
-  color: #e74c3c;
+  color: #0f0f0f;
   margin-bottom: 20px;
 }
 
@@ -256,16 +256,16 @@
 }
 
 .form-actions button[type="submit"] {
-  background-color: #007bff;
+  background-color:#8b5cf6;
   color: white;
 }
 
 .form-actions button[type="submit"]:hover {
-  background-color: #0056b3;
+  background-color: #ac8ef3;
 }
 
 .cancel-btn {
-  background-color: #d42a17;
+  background-color: #101010;
   color: white;
 }
 

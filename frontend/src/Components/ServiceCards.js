@@ -58,13 +58,13 @@ const ServiceCards = () => {
 <div style={{
   position: 'fixed',
   top: '70px', // Adjust based on your navbar height
-  right: '40px',
+  right: '120px',
   zIndex: '1000'
 }}>
   <button
     onClick={() => window.location.href = '/my-bookings'}
     style={{
-      backgroundColor: '#4a90e2',
+      backgroundColor: '#ac8ef3',
       color: 'white',
       padding: '8px 16px',
       border: 'none',
@@ -75,8 +75,8 @@ const ServiceCards = () => {
       boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
       transition: 'background 0.2s'
     }}
-    onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#357abd'}
-    onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#4a90e2'}
+    onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#ac8ef3'}
+    onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#a189d7ff'}
   >
     My Bookings
   </button>
