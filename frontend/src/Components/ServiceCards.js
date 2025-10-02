@@ -2,13 +2,16 @@
 
 import { useEffect, useState } from "react"
 import { ServiceAPI } from "../Services/api"
-import Navigation from "./navigation" // adjust path if needed
+import Navigation from "./navigation"
 import "../styles/services.css"
+import BookingForm from "./BookingForm"; // ← ADDED
 
 const ServiceCards = () => {
   const [services, setServices] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [showBookingForm, setShowBookingForm] = useState(false); // ← ADDED
+  const [selectedService, setSelectedService] = useState(null); // ← ADDED
 
   useEffect(() => {
     fetchServices()
@@ -34,6 +37,11 @@ const ServiceCards = () => {
     }
   }
 
+  const handleBook = (service) => { // ← ADDED
+    setSelectedService(service);
+    setShowBookingForm(true);
+  };
+
   if (loading) return <div style={{ textAlign: "center", padding: "40px" }}>Loading...</div>
   if (error) return <div style={{ color: "red", textAlign: "center" }}>{error}</div>
 
@@ -44,10 +52,42 @@ const ServiceCards = () => {
         minHeight: "100vh"
       }}
     >
-      {/* ✅ Navbar at top */}
       <Navigation showLogout={true} />
+       
+         {/* ✅ My Bookings Button - Top Right, Below Navbar */}
+<div style={{
+  position: 'fixed',
+  top: '70px', // Adjust based on your navbar height
+  right: '120px',
+  zIndex: '1000'
+}}>
+  <button
+    onClick={() => window.location.href = '/my-bookings'}
+    style={{
+      backgroundColor: '#ac8ef3',
+      color: 'white',
+      padding: '8px 16px',
+      border: 'none',
+      borderRadius: '6px',
+      fontSize: '14px',
+      fontWeight: '600',
+      cursor: 'pointer',
+      boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
+      transition: 'background 0.2s'
+    }}
+    onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#ac8ef3'}
+    onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#a189d7ff'}
+  >
+    My Bookings
+  </button>
+</div>
 
-      {/* ✅ Add padding-top so content is not hidden behind fixed navbar */}
+
+
+
+
+
+
       <div style={{ paddingTop: "100px", paddingLeft: "20px", paddingRight: "20px" }}>
         <h1 style={{ fontSize: "32px", marginBottom: "20px", textAlign: "center", color: "#2d3748" }}>
           Our Salon Services
@@ -75,7 +115,6 @@ const ServiceCards = () => {
               e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.1)"
             }}
             >
-              {/* Service Image */}
               {srv.imageUrl ? (
                 <img
                   src={`http://localhost:8080/api/v1.0/uploads/${srv.imageUrl}`}
@@ -92,7 +131,6 @@ const ServiceCards = () => {
                 </div>
               )}
 
-              {/* Card Content */}
               <div style={{ padding: "16px" }}>
                 <h2 style={{ fontSize: "20px", fontWeight: "600", marginBottom: "6px" }}>
                   {srv.serviceName || "Unnamed"}
@@ -111,19 +149,21 @@ const ServiceCards = () => {
                   <span style={{ fontSize: "18px", fontWeight: "bold", color: "#2d3748" }}>
                     Rs. {srv.price || "N/A"}
                   </span>
-                  <button style={{
-                    backgroundColor: "#4a90e2",
-                    color: "white",
-                    padding: "8px 14px",
-                    border: "none",
-                    borderRadius: "10px",
-                    fontSize: "14px",
-                    fontWeight: "600",
-                    cursor: "pointer",
-                    transition: "background 0.3s ease"
-                  }}
-                  onMouseOver={(e) => e.currentTarget.style.backgroundColor = "#357abd"}
-                  onMouseOut={(e) => e.currentTarget.style.backgroundColor = "#4a90e2"}
+                  <button
+                    style={{
+                      backgroundColor: "#4a90e2",
+                      color: "white",
+                      padding: "8px 14px",
+                      border: "none",
+                      borderRadius: "10px",
+                      fontSize: "14px",
+                      fontWeight: "600",
+                      cursor: "pointer",
+                      transition: "background 0.3s ease"
+                    }}
+                    onMouseOver={(e) => e.currentTarget.style.backgroundColor = "#357abd"}
+                    onMouseOut={(e) => e.currentTarget.style.backgroundColor = "#4a90e2"}
+                    onClick={() => handleBook(srv)} // ← CHANGED
                   >
                     Book Now
                   </button>
@@ -132,6 +172,14 @@ const ServiceCards = () => {
             </div>
           ))}
         </div>
+
+        {/* ✅ SHOW BOOKING FORM IF OPEN */}
+        {showBookingForm && selectedService && (
+          <BookingForm
+            service={selectedService}
+            onClose={() => setShowBookingForm(false)}
+          />
+        )}
       </div>
     </div>
   )

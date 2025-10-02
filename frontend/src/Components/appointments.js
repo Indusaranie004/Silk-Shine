@@ -1,0 +1,158 @@
+// src/Components/appointments.js
+"use client"
+
+import React, { useEffect, useState } from "react";
+import api from '../Services/api';
+import "../styles/services.css";
+import AssignStaffModal from './AssignStaffModal';
+
+const AppointmentsContent = () => {
+  const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showAssignModal, setShowAssignModal] = useState(false);
+  const [selectedBookingId, setSelectedBookingId] = useState(null);
+
+  // Fetch all bookings
+  const fetchAllBookings = async () => {
+    try {
+      const response = await api.get('/bookings');
+      setBookings(response.data);
+    } catch (error) {
+      console.error('Error fetching appointments:', error);
+      alert('Failed to load appointments.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllBookings();
+  }, []);
+
+  // Handle staff assignment success
+  const handleAssignSuccess = () => {
+    fetchAllBookings(); // Refresh the list
+  };
+
+  // Handle delete
+  const handleDelete = (bookingId) => {
+    if (!window.confirm('Are you sure you want to delete this appointment?')) return;
+
+    api.delete(`/bookings/${bookingId}`)
+      .then(() => {
+        setBookings(bookings.filter(b => b.id !== bookingId));
+        alert('Appointment deleted successfully!');
+      })
+      .catch(err => {
+        console.error('Error:', err);
+        alert('Failed to delete appointment.');
+      });
+  };
+
+  if (loading) {
+    return <div style={{ padding: '40px', textAlign: 'center' }}>Loading all appointments...</div>;
+  }
+
+  return (
+    <div style={{ padding: '20px' }}>
+      <h1 style={{ fontSize: '28px', marginBottom: '20px', color: '#2d3748' }}>
+        All Appointments
+      </h1>
+
+      {bookings.length === 0 ? (
+        <p>No appointments found.</p>
+      ) : (
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{
+            width: '100%',
+            borderCollapse: 'collapse',
+            background: 'white',
+            borderRadius: '8px',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+            minWidth: '900px' // Wider for new column
+          }}>
+            <thead>
+              <tr style={{ backgroundColor: '#f7fafc' }}>
+                <th style={{ padding: '12px', textAlign: 'left' }}>ID</th>
+                <th style={{ padding: '12px', textAlign: 'left' }}>Client</th>
+                <th style={{ padding: '12px', textAlign: 'left' }}>Service ID</th>
+                <th style={{ padding: '12px', textAlign: 'left' }}>Date</th>
+                <th style={{ padding: '12px', textAlign: 'left' }}>Time</th>
+                <th style={{ padding: '12px', textAlign: 'left' }}>Status</th>
+                <th style={{ padding: '12px', textAlign: 'left' }}>Staff</th>
+                <th style={{ padding: '12px', textAlign: 'left' }}>Assign</th> {/* ✅ NEW COLUMN */}
+                <th style={{ padding: '12px', textAlign: 'left' }}>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {bookings.map((booking) => (
+                <tr key={booking.id} style={{ borderBottom: '1px solid #e2e8f0' }}>
+                  <td style={{ padding: '12px' }}>{booking.id}</td>
+                  <td style={{ padding: '12px' }}>{booking.name}</td>
+                  <td style={{ padding: '12px' }}>{booking.serviceId}</td>
+                  <td style={{ padding: '12px' }}>{booking.date}</td>
+                  <td style={{ padding: '12px' }}>{booking.time}</td>
+                  <td style={{ padding: '12px' }}>{booking.assignmentStatus}</td>
+                  <td style={{ padding: '12px' }}>{booking.assignedStaffName || '—'}</td>
+                  
+                  {/* ✅ NEW ASSIGN COLUMN */}
+                  <td style={{ padding: '12px' }}>
+                    <button
+                      onClick={() => {
+                        setSelectedBookingId(booking.id);
+                        setShowAssignModal(true);
+                      }}
+                      style={{
+                        backgroundColor: "#8b5cf6",
+                        color: "white",
+                        border: "none",
+                        padding: "6px 12px",
+                        borderRadius: "4px",
+                        cursor: "pointer",
+                        fontSize: "14px"
+                      }}
+                    >
+                      Assign
+                    </button>
+                  </td>
+
+                  {/* ✅ ACTIONS COLUMN (Delete only) */}
+                  <td style={{ padding: '12px' }}>
+                    <button
+                      onClick={() => handleDelete(booking.id)}
+                      style={{
+                        background: "none",
+                        border: "none",
+                        cursor: "pointer",
+                        fontSize: "18px",
+                        color: "#e53e3e",
+                        padding: "4px",
+                        borderRadius: "4px",
+                        transition: "background 0.2s"
+                      }}
+                      onMouseOver={(e) => e.currentTarget.style.backgroundColor = "#fee"}
+                      onMouseOut={(e) => e.currentTarget.style.backgroundColor = "transparent"}
+                    >
+                      🗑️
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {/* ✅ ASSIGN STAFF MODAL */}
+      {showAssignModal && selectedBookingId && (
+        <AssignStaffModal
+          bookingId={selectedBookingId}
+          onClose={() => setShowAssignModal(false)}
+          onAssignSuccess={handleAssignSuccess}
+        />
+      )}
+    </div>
+  );
+};
+
+export default AppointmentsContent;
