@@ -23,6 +23,7 @@ public class SecurityConfig {
                         .requestMatchers("/admin/").authenticated()       // tighten as you build auth
                         .requestMatchers("/services/**").permitAll()
                         .requestMatchers("/bookings/**").permitAll() // Bookings (optional: allow all for now, can secure later)
+                        .requestMatchers("/payments/**").permitAll() // ✅ open for now
                         .anyRequest().permitAll()
                 );
         return http.build();

@@ -7,6 +7,7 @@ import CustomersContent from './customer'
 import StaffContent from "./staff";
 import ServicesContent from "./services";
 import AppointmentsContent from "./appointments";
+import AllPayments from "./AllPayments";
 
 function Dashboard() {
   const [activeNav, setActiveNav] = useState("Dashboard")
@@ -68,7 +69,7 @@ function Dashboard() {
     { name: "Staff", route: "/staff", action: "navigate" },
     { name: "Services", route: "/services", action: "navigate" },
     { name: "Appointments", route: "/appointments", action: "navigate" },
-    { name: "Finance", route: "/finance", action: "navigate" },
+    { name: "Payments", route: "/all-payments", action: "navigate" },
     { name: "Activity Log", route: "/activity-log", action: "navigate" },
     { name: "Work Allocation", route: "/work-allocation", action: "navigate" }
     
@@ -178,7 +179,8 @@ function Dashboard() {
           {activeNav === "Customers" && <CustomersContent />}
           {activeNav === "Staff" && <StaffContent />}
           {activeNav === "Services" && <ServicesContent />}
-           {activeNav === "Appointments" && <AppointmentsContent />} {/* ← ADD THIS */}
+           {activeNav === "Appointments" && <AppointmentsContent />}{/* ← ADD THIS */}
+           {activeNav === "Payments" && <AllPayments />}
         </div>
       </div>
     </div>
