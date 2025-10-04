@@ -49,10 +49,14 @@ export default function Navigation({ showLogout = true }) {
 
         {/* Navigation Links */}
         <Flex align="center" gap={25}>
-          <Link href="/home" className="nav-link">
+          <Link href={showLogout ? "/Home" : "/"}
+          className="nav-link"
+          >
             Home
           </Link>
-          <Link href="/about" className="nav-link">
+          <Link href={showLogout ? "/about" : "/guest-about"}
+          className="nav-link"
+          >
             About
           </Link>
           <Link

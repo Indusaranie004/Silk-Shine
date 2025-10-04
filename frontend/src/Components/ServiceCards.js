@@ -6,6 +6,7 @@ import Navigation from "./navigation"
 import "../styles/services.css"
 import BookingForm from "./BookingForm"; // ← ADDED
 
+
 const ServiceCards = () => {
   const [services, setServices] = useState([])
   const [loading, setLoading] = useState(true)
@@ -54,11 +55,13 @@ const ServiceCards = () => {
     >
       <Navigation showLogout={true} />
        
-         {/* ✅ My Bookings Button - Top Right, Below Navbar */}
+         
+{/* ✅ My Bookings (Left) & My Payments (Right) */}
+{/* My Bookings - Left Side */}
 <div style={{
   position: 'fixed',
-  top: '70px', // Adjust based on your navbar height
-  right: '120px',
+  top: '70px',
+  left: '120px',
   zIndex: '1000'
 }}>
   <button
@@ -75,12 +78,41 @@ const ServiceCards = () => {
       boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
       transition: 'background 0.2s'
     }}
-    onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#ac8ef3'}
-    onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#a189d7ff'}
+    onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#8d73d6'}
+    onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#ac8ef3'}
   >
     My Bookings
   </button>
 </div>
+
+{/* My Payments - Right Side */}
+<div style={{
+  position: 'fixed',
+  top: '70px',
+  right: '120px',
+  zIndex: '1000'
+}}>
+  <button
+    onClick={() => window.location.href = '/my-payments'}
+    style={{
+      backgroundColor: '#ac8ef3',
+      color: 'white',
+      padding: '8px 16px',
+      border: 'none',
+      borderRadius: '6px',
+      fontSize: '14px',
+      fontWeight: '600',
+      cursor: 'pointer',
+      boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
+      transition: 'background 0.2s'
+    }}
+    onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#8d73d6'}
+    onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#ac8ef3'}
+  >
+    My Payments
+  </button>
+</div>
+
 
 
 
@@ -151,7 +183,7 @@ const ServiceCards = () => {
                   </span>
                   <button
                     style={{
-                      backgroundColor: "#4a90e2",
+                      backgroundColor: "#ac8ef3",
                       color: "white",
                       padding: "8px 14px",
                       border: "none",
@@ -161,8 +193,8 @@ const ServiceCards = () => {
                       cursor: "pointer",
                       transition: "background 0.3s ease"
                     }}
-                    onMouseOver={(e) => e.currentTarget.style.backgroundColor = "#357abd"}
-                    onMouseOut={(e) => e.currentTarget.style.backgroundColor = "#4a90e2"}
+                    onMouseOver={(e) => e.currentTarget.style.backgroundColor = "#8d73d6"}
+                    onMouseOut={(e) => e.currentTarget.style.backgroundColor = "#ac8ef3"}
                     onClick={() => handleBook(srv)} // ← CHANGED
                   >
                     Book Now

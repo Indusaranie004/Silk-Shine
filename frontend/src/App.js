@@ -15,6 +15,11 @@ import GuestServices from './Components/guestServices';
 import ClientProfilePage from './Components/ClientProfilePage';
 import StaffDashboard from './Components/StaffDashboard';
 import MyBookings from './Components/MyBookings';
+import PaymentForm from './Components/PaymentForm';
+import UserPayments from './Components/UserPayments'; 
+import About from './Components/About';
+import GuestAbout from './Components/GuestAbout';
+import AllPayments from './Components/AllPayments'; 
 
 function App() {
   return (
@@ -35,10 +40,11 @@ function App() {
           <Route path='/client-profile' element={<ClientProfilePage />} />
           <Route path='/dashboard_staff' element={<StaffDashboard />} />
           <Route path="/my-bookings" element={<MyBookings />} />
- 
- 
-
- 
+          <Route path="/payment/:bookingId" element={<PaymentForm />} />
+          <Route path="/my-payments" element={<UserPayments />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/guest-about" element={<GuestAbout />} />
+          <Route path="/all-payments" element={<AllPayments />} /> 
 
 
           
