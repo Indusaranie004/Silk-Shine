@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -50,5 +51,18 @@ public interface UserRepositary extends JpaRepository<UserEntity, Long> {
 
     // NEW - used when updating email to ensure uniqueness
     boolean existsByEmailAndUserIdNot(String email, String userId);
+
+
+    // NEW: Find user by UUID string
+    @Query("SELECT u FROM UserEntity u WHERE u.id = :userId")
+    Optional<UserEntity> findUserByUserId(@Param("userId") String userId);
+
+    // NEW: Get client emails
+    @Query("SELECT u.email FROM UserEntity u WHERE u.role = 'CLIENT'")
+    List<String> findClientEmails();;
+
+
+
+
 
 }
