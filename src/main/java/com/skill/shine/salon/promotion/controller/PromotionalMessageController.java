@@ -1,0 +1,32 @@
+package com.skill.shine.salon.promotion.controller;
+
+import com.skill.shine.salon.promotion.dto.PromotionalMessageRequest;
+import com.skill.shine.salon.promotion.dto.PromotionalMessageResponse;
+import com.skill.shine.salon.promotion.service.PromotionalMessageService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/promotions")
+@RequiredArgsConstructor
+
+
+
+public class PromotionalMessageController {
+
+    private final PromotionalMessageService promotionService;
+
+    @PostMapping("/send")
+    public ResponseEntity<PromotionalMessageResponse> sendPromotionalMessage(
+            @RequestBody PromotionalMessageRequest request,
+            @RequestHeader("X-User-Id") String adminUserId) {
+
+        PromotionalMessageResponse response = promotionService.sendPromotionalMessage(request, adminUserId);
+        return ResponseEntity.ok(response);
+    }
+
+
+
+
+}
