@@ -29,17 +29,18 @@ public class PromotionalMessageServiceImpl implements PromotionalMessageService 
 
     @Override
     @Transactional
-    public PromotionalMessageResponse sendPromotionalMessage(PromotionalMessageRequest request, String adminUserId) {
+    public PromotionalMessageResponse sendPromotionalMessage(PromotionalMessageRequest request) {
+        // Create message without admin ID
         PromotionalMessage message = PromotionalMessage.builder()
                 .title(request.getTitle())
                 .content(request.getContent())
                 .targetAudience(request.getTargetAudience())
-                .sentBy(adminUserId)
                 .sentAt(LocalDateTime.now())
                 .sentSuccessfully(false)
                 .build();
 
         message = messageRepository.save(message);
+
         try {
             List<String> emails = getRecipientEmails(request.getTargetAudience());
             for (String email : emails) {
@@ -56,7 +57,6 @@ public class PromotionalMessageServiceImpl implements PromotionalMessageService 
                 .title(message.getTitle())
                 .content(message.getContent())
                 .targetAudience(message.getTargetAudience())
-                .sentBy(message.getSentBy())
                 .sentAt(message.getSentAt().toString())
                 .sentSuccessfully(message.isSentSuccessfully())
                 .build();

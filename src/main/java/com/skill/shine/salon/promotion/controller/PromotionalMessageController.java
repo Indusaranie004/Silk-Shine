@@ -19,10 +19,9 @@ public class PromotionalMessageController {
 
     @PostMapping("/send")
     public ResponseEntity<PromotionalMessageResponse> sendPromotionalMessage(
-            @RequestBody PromotionalMessageRequest request,
-            @RequestHeader("X-User-Id") String adminUserId) {
+            @RequestBody PromotionalMessageRequest request) {
 
-        PromotionalMessageResponse response = promotionService.sendPromotionalMessage(request, adminUserId);
+        PromotionalMessageResponse response = promotionService.sendPromotionalMessage(request);
         return ResponseEntity.ok(response);
     }
 

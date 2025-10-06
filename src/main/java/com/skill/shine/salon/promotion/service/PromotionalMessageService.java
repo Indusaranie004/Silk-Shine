@@ -8,7 +8,7 @@ import com.skill.shine.salon.promotion.dto.PromotionalMessageResponse;
 public interface PromotionalMessageService {
 
 
-    PromotionalMessageResponse sendPromotionalMessage(PromotionalMessageRequest request, String adminUserId);
+    PromotionalMessageResponse sendPromotionalMessage(PromotionalMessageRequest request);
 
 
 
