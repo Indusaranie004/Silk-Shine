@@ -15,7 +15,7 @@ public class PromotionalMessageResponse {
     private String title;
     private String content;
     private String targetAudience;
-    private String sentBy;
+
     private String sentAt;
     private boolean sentSuccessfully;
 

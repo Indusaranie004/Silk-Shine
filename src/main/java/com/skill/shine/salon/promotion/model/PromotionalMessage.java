@@ -23,8 +23,7 @@ public class PromotionalMessage {
     private String content;
     private String targetAudience;
 
-    @Column(name = "sent_by")
-    private String sentBy;
+
 
     @Column(name = "sent_at")
     private LocalDateTime sentAt;
