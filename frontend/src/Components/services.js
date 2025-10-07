@@ -22,6 +22,10 @@ const ServicesContent = () => {
     imageFile: null
   })
 
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1)
+  const rowsPerPage = 5
+
   useEffect(() => {
     fetchServices()
   }, [])
@@ -37,6 +41,7 @@ const ServicesContent = () => {
         srv.category?.toLowerCase().includes(searchTerm.toLowerCase())
     )
     setFilteredServices(filtered)
+    setCurrentPage(1) // Reset page when search changes
   }, [searchTerm, services])
 
   const fetchServices = async () => {
@@ -140,6 +145,12 @@ const ServicesContent = () => {
     }
   }
 
+  // Pagination calculations
+  const indexOfLastRow = currentPage * rowsPerPage
+  const indexOfFirstRow = indexOfLastRow - rowsPerPage
+  const currentRows = filteredServices.slice(indexOfFirstRow, indexOfLastRow)
+  const totalPages = Math.ceil(filteredServices.length / rowsPerPage)
+
   if (loading) return <div style={{ padding: "40px", textAlign: "center" }}>Loading services...</div>
 
   return (
@@ -165,7 +176,7 @@ const ServicesContent = () => {
         <button
           onClick={handleAddClick}
           style={{
-            backgroundColor: "#4a90e2",
+            backgroundColor: "#8b5cf6",
             color: "white",
             padding: "10px 18px",
             border: "none",
@@ -190,12 +201,12 @@ const ServicesContent = () => {
           <div style={{ width: "80px" }}>Actions</div>
         </div>
 
-        {filteredServices.length === 0 ? (
+        {currentRows.length === 0 ? (
           <div style={{ padding: "20px", textAlign: "center", color: "#666" }}>
             {searchTerm ? "No services found matching your search." : "No services available."}
           </div>
         ) : (
-          filteredServices.map(srv => (
+          currentRows.map(srv => (
             <div key={srv.id} style={{ display: "flex", alignItems: "center", padding: "10px 0", borderBottom: "1px solid #eee" }}>
               <div style={{ flex: 1 }}>{srv.serviceName || "N/A"}</div>
               <div style={{ flex: 1 }}>{srv.category || "N/A"}</div>
@@ -205,13 +216,37 @@ const ServicesContent = () => {
               <div style={{ flex: 1 }}>{srv.price || "N/A"}</div>
               <div style={{ flex: 2 }}>{srv.description || "N/A"}</div>
               <div style={{ width: "80px", display: "flex", gap: "8px" }}>
-                <button onClick={() => handleEditClick(srv)} style={{ background: "none", border: "none", cursor: "pointer", color: "#3182ce" }}>✏️</button>
+                <button onClick={() => handleEditClick(srv)} style={{ background: "none", border: "none", cursor: "pointer", color: "#8b5cf6" }}>✏️</button>
                 <button onClick={() => handleDelete(srv.id)} style={{ background: "none", border: "none", cursor: "pointer", color: "#c53030" }}>🗑️</button>
               </div>
             </div>
           ))
         )}
       </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div style={{ marginTop: "20px", display: "flex", justifyContent: "center", gap: "5px" }}>
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              style={{
+                padding: "6px 12px",
+                borderRadius: "4px",
+                border: "none",
+                cursor: "pointer",
+                backgroundColor: currentPage === page ? "#8b5cf6" : "#f3f4f6",
+                color: currentPage === page ? "#fff" : "#374151",
+                fontWeight: "600",
+                transition: 'all 0.3s ease'
+              }}
+            >
+              {page}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Edit Modal */}
       {editService && (
@@ -269,7 +304,7 @@ const ServiceModal = ({ title, formData, setFormData, onClose, onSubmit }) => {
         <textarea name="description" placeholder="Description" value={formData.description} onChange={handleFormChange} />
         <input type="file" name="imageFile" onChange={handleFormChange} />
         <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px", marginTop: "10px" }}>
-          <button type="submit" style={{ padding: "8px 16px", backgroundColor: "#4a90e2", color: "white", borderRadius: "12px", border: "none" }}>Save</button>
+          <button type="submit" style={{ padding: "8px 16px", backgroundColor: "#8b5cf6", color: "white", borderRadius: "12px", border: "none" }}>Save</button>
           <button type="button" onClick={onClose} style={{ padding: "8px 16px", backgroundColor: "#c53030", color: "white", borderRadius: "12px", border: "none" }}>Cancel</button>
         </div>
       </form>

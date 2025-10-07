@@ -90,7 +90,7 @@ export default function Navigation({ showLogout = true }) {
             bg="black"
             color="white"
             textDecoration="none"
-            _hover={{ bg: "#8b5cf6", color: "white", textDecoration: "none" }}
+            _hover={{ bg: "#0a0a0ae2", color: "white", textDecoration: "none" }}
           >
             Logout
           </Button>

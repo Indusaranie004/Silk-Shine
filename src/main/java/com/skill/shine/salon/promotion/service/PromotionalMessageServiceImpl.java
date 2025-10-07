@@ -87,6 +87,28 @@ public class PromotionalMessageServiceImpl implements PromotionalMessageService 
     }
 
 
+    @Override
+    public List<PromotionalMessageResponse> getAllPromotionalMessages() {
+        return messageRepository.findAll()
+                .stream()
+                .map(msg -> PromotionalMessageResponse.builder()
+                        .id(msg.getId())
+                        .title(msg.getTitle())
+                        .content(msg.getContent())
+                        .targetAudience(msg.getTargetAudience())
+                        .sentAt(msg.getSentAt().toString())
+                        .sentSuccessfully(msg.isSentSuccessfully())
+                        .build())
+                .toList();
+    }
+
+    @Override
+    public void deletePromotionalMessage(Long id) {
+        if (!messageRepository.existsById(id)) {
+            throw new RuntimeException("Promotional message not found with ID: " + id);
+        }
+        messageRepository.deleteById(id);
+    }
 
 
 

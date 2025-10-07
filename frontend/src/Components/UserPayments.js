@@ -10,6 +10,10 @@ const UserPayments = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // 🔹 Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const rowsPerPage = 5;
+
   useEffect(() => {
     const fetchPayments = async () => {
       if (!userId) {
@@ -47,6 +51,12 @@ const UserPayments = () => {
         {error}
       </p>
     );
+
+  // 🔹 Pagination logic
+  const indexOfLastRow = currentPage * rowsPerPage;
+  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+  const currentRows = payments.slice(indexOfFirstRow, indexOfLastRow);
+  const totalPages = Math.ceil(payments.length / rowsPerPage);
 
   return (
     <div style={{ background: "linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)", minHeight: "100vh" }}>
@@ -94,7 +104,7 @@ const UserPayments = () => {
                 </tr>
               </thead>
               <tbody>
-                {payments.map(p => (
+                {currentRows.map(p => (
                   <tr key={p.id} style={{ borderBottom: "1px solid #ddd" }}>
                     <td style={{ padding: "12px 15px" }}>{p.bookingId}</td>
                     <td style={{ padding: "12px 15px" }}>{p.amount}</td>
@@ -109,6 +119,30 @@ const UserPayments = () => {
                 ))}
               </tbody>
             </table>
+
+            {/* 🔹 Pagination Buttons */}
+            {totalPages > 1 && (
+              <div style={{ marginTop: "12px", display: "flex", justifyContent: "center", gap: "6px" }}>
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    style={{
+                      padding: "6px 12px",
+                      borderRadius: "4px",
+                      border: "none",
+                      cursor: "pointer",
+                      backgroundColor: currentPage === page ? "#8b5cf6" : "#f3f4f6",
+                      color: currentPage === page ? "#fff" : "#374151",
+                      fontWeight: "600",
+                      transition: 'all 0.3s ease'
+                    }}
+                  >
+                    {page}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </div>

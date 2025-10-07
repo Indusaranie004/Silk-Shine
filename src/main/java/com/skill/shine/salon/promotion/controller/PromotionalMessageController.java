@@ -6,6 +6,7 @@ import com.skill.shine.salon.promotion.service.PromotionalMessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequestMapping("/promotions")
@@ -26,6 +27,19 @@ public class PromotionalMessageController {
     }
 
 
+    // Get all promotional messages
+    @GetMapping("/all")
+    public ResponseEntity<List<PromotionalMessageResponse>> getAllMessages() {
+        List<PromotionalMessageResponse> messages = promotionService.getAllPromotionalMessages();
+        return ResponseEntity.ok(messages);
+    }
 
+
+    // Delete a message by ID
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteMessage(@PathVariable Long id) {
+        promotionService.deletePromotionalMessage(id);
+        return ResponseEntity.ok("Promotional message deleted successfully");
+    }
 
 }
