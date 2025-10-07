@@ -20,6 +20,9 @@ import UserPayments from './Components/UserPayments';
 import About from './Components/About';
 import GuestAbout from './Components/GuestAbout';
 import AllPayments from './Components/AllPayments'; 
+import PromotionalForm from './Components/PromotionalForm';
+import PromotionsTable from './Components/PromotionsTable';
+
 
 function App() {
   return (
@@ -45,7 +48,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/guest-about" element={<GuestAbout />} />
           <Route path="/all-payments" element={<AllPayments />} /> 
-
+          <Route path="/promotions-form" element={<PromotionalForm />} />
+          <Route path="/promotions/all" element={<PromotionsTable />} />
 
           
         </Routes>

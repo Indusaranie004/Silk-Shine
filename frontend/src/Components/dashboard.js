@@ -8,6 +8,7 @@ import StaffContent from "./staff";
 import ServicesContent from "./services";
 import AppointmentsContent from "./appointments";
 import AllPayments from "./AllPayments";
+import PromotionsTable from "./PromotionsTable";
 
 function Dashboard() {
   const [activeNav, setActiveNav] = useState("Dashboard")
@@ -70,7 +71,7 @@ function Dashboard() {
     { name: "Services", route: "/services", action: "navigate" },
     { name: "Appointments", route: "/appointments", action: "navigate" },
     { name: "Payments", route: "/all-payments", action: "navigate" },
-    { name: "Activity Log", route: "/activity-log", action: "navigate" },
+    { name: "Promotions", route: "/promotions/all", action: "navigate" },
     { name: "Work Allocation", route: "/work-allocation", action: "navigate" }
     
   ]
@@ -181,6 +182,8 @@ function Dashboard() {
           {activeNav === "Services" && <ServicesContent />}
            {activeNav === "Appointments" && <AppointmentsContent />}{/* ← ADD THIS */}
            {activeNav === "Payments" && <AllPayments />}
+           {activeNav === "Promotions" && <PromotionsTable />}
+
         </div>
       </div>
     </div>

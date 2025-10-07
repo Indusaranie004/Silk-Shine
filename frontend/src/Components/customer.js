@@ -12,6 +12,10 @@ const CustomersContent = () => {
   const [filteredCustomers, setFilteredCustomers] = useState([])
   const [searchLoading, setSearchLoading] = useState(false)
 
+  // 🔹 Pagination state
+  const [currentPage, setCurrentPage] = useState(1)
+  const rowsPerPage = 5
+
   useEffect(() => {
     fetchCustomers()
   }, [])
@@ -28,6 +32,7 @@ const CustomersContent = () => {
         customer.email?.toLowerCase().includes(searchTerm.toLowerCase()),
     )
     setFilteredCustomers(filtered)
+    setCurrentPage(1) // Reset to first page on search
   }, [searchTerm, customers])
 
   const fetchCustomers = async () => {
@@ -75,6 +80,12 @@ const CustomersContent = () => {
       </div>
     )
   }
+
+  // 🔹 Pagination logic
+  const indexOfLastRow = currentPage * rowsPerPage
+  const indexOfFirstRow = indexOfLastRow - rowsPerPage
+  const currentRows = filteredCustomers.slice(indexOfFirstRow, indexOfLastRow)
+  const totalPages = Math.ceil(filteredCustomers.length / rowsPerPage)
 
   return (
     <div
@@ -206,7 +217,7 @@ const CustomersContent = () => {
             minHeight: 0,
           }}
         >
-          {filteredCustomers.length === 0 ? (
+          {currentRows.length === 0 ? (
             <div
               className="empty-state"
               style={{
@@ -218,7 +229,7 @@ const CustomersContent = () => {
               {searchTerm ? "No customers found matching your search." : "No customers available."}
             </div>
           ) : (
-            filteredCustomers.map((customer) => (
+            currentRows.map((customer) => (
               <div
                 key={customer.userId}
                 className="customer-row"
@@ -302,6 +313,30 @@ const CustomersContent = () => {
           )}
         </div>
       </div>
+
+      {/* 🔹 Pagination Buttons */}
+      {totalPages > 1 && (
+        <div style={{ marginTop: "12px", display: "flex", justifyContent: "center", gap: "6px" }}>
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              style={{
+                padding: "6px 12px",
+                borderRadius: "4px",
+                border: "none",
+                cursor: "pointer",
+                backgroundColor: currentPage === page ? "#8b5cf6" : "#f3f4f6",
+                color: currentPage === page ? "#fff" : "#374151",
+                fontWeight: "600",
+                transition: 'all 0.3s ease'
+              }}
+            >
+              {page}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
