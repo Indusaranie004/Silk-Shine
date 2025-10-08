@@ -126,7 +126,7 @@ const StaffSalaryTable = () => {
                 <th style={styles.th}>Total Salary</th>
                 <th style={styles.th}>ETF Amount</th>
                 <th style={styles.th}>EPF Amount</th>
-                <th style={styles.th}>Notes</th>
+                <th style={styles.th}>Name</th>
                 <th style={styles.th}>Actions</th>
               </tr>
             </thead>
