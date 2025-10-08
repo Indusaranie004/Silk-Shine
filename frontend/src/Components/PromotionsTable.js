@@ -65,16 +65,16 @@ const PromotionsTable = () => {
         <p>Loading...</p>
       ) : (
         <>
-          <table style={styles.table}>
+          <table style={{ width: "100%", borderCollapse: "collapse", background: "#fff", borderRadius: "10px" }}>
             <thead>
-              <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Content</th>
-                <th>Audience</th>
-                <th>Sent At</th>
-                <th>Success</th>
-                <th>Actions</th>
+              <tr style={{ background: "#8d73d6", color: "#fff" }}>
+                <th style={{ padding: "10px", border: "1px solid #ddd" }}>ID</th>
+                <th style={{ padding: "10px", border: "1px solid #ddd" }}>Title</th>
+                <th style={{ padding: "10px", border: "1px solid #ddd" }}>Content</th>
+                <th style={{ padding: "10px", border: "1px solid #ddd" }}>Audience</th>
+                <th style={{ padding: "10px", border: "1px solid #ddd" }}>Sent At</th>
+                <th style={{ padding: "10px", border: "1px solid #ddd" }}>Success</th>
+                <th style={{ padding: "10px", border: "1px solid #ddd" }}>Actions</th>
               </tr>
             </thead>
             <tbody>

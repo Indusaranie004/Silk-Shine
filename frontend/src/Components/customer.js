@@ -183,7 +183,7 @@ const CustomersContent = () => {
               flex: "1 1 40%",
               minWidth: "120px",
               fontWeight: "600",
-              color: "#4a5568",
+              color: "#4a5568", 
             }}
           >
             Name
