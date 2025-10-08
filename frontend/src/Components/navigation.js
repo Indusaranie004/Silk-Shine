@@ -65,10 +65,11 @@ export default function Navigation({ showLogout = true }) {
           >
             Services
           </Link>
-          <Link href="/portfolio" className="nav-link">
+          {/*<Link href="/portfolio" className="nav-link">
             Portfolio
-          </Link>
-          <Link href="/contact" className="nav-link">
+          </Link> */}
+          <Link href={showLogout ? "/contact-us" : "/guest-contact-us"} 
+          className="nav-link">
             Contact
           </Link>
 

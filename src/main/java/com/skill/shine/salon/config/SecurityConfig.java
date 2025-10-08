@@ -24,6 +24,10 @@ public class SecurityConfig {
                         .requestMatchers("/services/**").permitAll()
                         .requestMatchers("/bookings/**").permitAll() // Bookings (optional: allow all for now, can secure later)
                         .requestMatchers("/payments/**").permitAll() // ✅ open for now
+                        .requestMatchers("/contact/**").permitAll() // Contact Us
+                        .requestMatchers("/dashboard/**").permitAll()  // ✅ allow dashboard APIs
+                        .requestMatchers("/staff-salary/**").permitAll() // or add proper staff authentication later
+
                         .anyRequest().permitAll()
                 );
         return http.build();

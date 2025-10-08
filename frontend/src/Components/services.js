@@ -24,7 +24,7 @@ const ServicesContent = () => {
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1)
-  const rowsPerPage = 5
+  const rowsPerPage = 4
 
   useEffect(() => {
     fetchServices()
@@ -191,14 +191,14 @@ const ServicesContent = () => {
       </div>
 
       {/* Services List */}
-      <div>
-        <div style={{ display: "flex", fontWeight: "bold", padding: "10px 0", borderBottom: "1px solid #ccc" }}>
-          <div style={{ flex: 1 }}>Name</div>
-          <div style={{ flex: 1 }}>Category</div>
-          <div style={{ flex: 1 }}>Image</div>
-          <div style={{ flex: 1 }}>Price</div>
-          <div style={{ flex: 2 }}>Description</div>
-          <div style={{ width: "80px" }}>Actions</div>
+      <div style={{ width: "100%", borderCollapse: "collapse",background: "#fff", borderRadius: "10px" }}>
+        <div style={{ background: "#8d73d6", color: "#fff", display: "flex", fontWeight: "bold", padding: "10px 0" }}>
+          <div style={{ flex: 1,padding: "10px", border: "1px " }}>Name</div>
+          <div style={{ flex: 1, padding: "10px", border: "1px " }}>Category</div>
+          <div style={{ flex: 1, padding: "10px", border: "1px " }}>Image</div>
+          <div style={{ flex: 1, padding: "10px", border: "1px " }}>Price</div>
+          <div style={{ flex: 2, padding: "10px", border: "1px " }}>Description</div>
+          <div style={{ width: "90px", padding: "10px", border: "1px " }}>Actions</div>
         </div>
 
         {currentRows.length === 0 ? (
@@ -305,7 +305,7 @@ const ServiceModal = ({ title, formData, setFormData, onClose, onSubmit }) => {
         <input type="file" name="imageFile" onChange={handleFormChange} />
         <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px", marginTop: "10px" }}>
           <button type="submit" style={{ padding: "8px 16px", backgroundColor: "#8b5cf6", color: "white", borderRadius: "12px", border: "none" }}>Save</button>
-          <button type="button" onClick={onClose} style={{ padding: "8px 16px", backgroundColor: "#c53030", color: "white", borderRadius: "12px", border: "none" }}>Cancel</button>
+          <button type="button" onClick={onClose} style={{ padding: "8px 16px", backgroundColor: "#2d3748", color: "white", borderRadius: "12px", border: "none" }}>Cancel</button>
         </div>
       </form>
     </div>

@@ -70,7 +70,7 @@ const AllPayments = () => {
   // Styles (keep existing)
   const containerStyle = {
     padding: "30px",
-    background: "#f7fafc",
+    //background: "#f7fafc",
     minHeight: "100vh",
     fontFamily: "Arial, sans-serif",
   };
@@ -128,19 +128,19 @@ const AllPayments = () => {
         <p>No payments found</p>
       ) : (
         <>
-          <table style={tableStyle}>
+          <table style={{ width: "100%", borderCollapse: "collapse", background: "#fff", borderRadius: "10px" }}>
             <thead style={{ backgroundColor: "#edf2f7" }}>
-              <tr>
-                <th style={thTdStyle}>ID</th>
-                <th style={thTdStyle}>User</th>
-                <th style={thTdStyle}>Booking</th>
-                <th style={thTdStyle}>Amount</th>
-                <th style={thTdStyle}>Date</th>
-                <th style={thTdStyle}>Time</th>
-                <th style={thTdStyle}>Status</th>
-                <th style={thTdStyle}>Method</th>
-                <th style={thTdStyle}>Transaction</th>
-                <th style={thTdStyle}>Actions</th>
+              <tr style={{ background: "#8d73d6", color: "#fff" }}>
+                <th style={{ padding: "10px", border: "1px solid #ddd" }}>ID</th>
+                <th style={{ padding: "10px", border: "1px solid #ddd" }}>User</th>
+                <th style={{ padding: "10px", border: "1px solid #ddd" }}>Booking</th>
+                <th style={{ padding: "10px", border: "1px solid #ddd" }}>Amount</th>
+                <th style={{ padding: "10px", border: "1px solid #ddd" }}>Date</th>
+                <th style={{ padding: "10px", border: "1px solid #ddd" }}>Time</th>
+                <th style={{ padding: "10px", border: "1px solid #ddd" }}>Status</th>
+                <th style={{ padding: "10px", border: "1px solid #ddd" }}>Method</th>
+                <th style={{ padding: "10px", border: "1px solid #ddd" }}>Transaction</th>
+                <th style={{ padding: "10px", border: "1px solid #ddd" }}>Actions</th>
               </tr>
             </thead>
             <tbody>

@@ -3,6 +3,9 @@
 import { useState, useEffect } from "react"
 import Logo from "../assets/images/Logo.png"
 import StaffProfilePage from "./StaffProfile"
+import StaffServicesDisplay from "./StaffServicesDisplay"
+import StaffProfileWithSalary from "./StaffProfileWithSalary"
+import StaffSalaryDashboard from "./StaffSalaryDashboard"
 
 function StaffDashboard() {
   const [activeNav, setActiveNav] = useState("Dashboard")
@@ -74,9 +77,11 @@ function StaffDashboard() {
   // Navigation items (for staff)
   const navItems = [
     { name: "Dashboard" },
-    { name: "Profile" },
-    { name: "Appointments" },
+    { name: "Salary" },
     { name: "Services" },
+    { name: "Appointments" },
+    { name: "Profile" },
+    
   ]
 
   // Handle navigation clicks
@@ -150,7 +155,7 @@ function StaffDashboard() {
             style={{
               marginTop: "auto",
               padding: "12px 16px",
-              background: "#703ee5ff",
+              background: "#8d73d6",
               borderRadius: "8px",
               color: "white",
               fontWeight: "600",
@@ -166,18 +171,24 @@ function StaffDashboard() {
 
         {/* Main Content */}
         <div style={mainContentStyle}>
-          {activeNav === "Dashboard" && (
-            <h1 style={{ fontSize: "32px", fontWeight: "bold", color: "#2d3748" }}>
-              Welcome back, {staffName || "Staff"} 👋
-            </h1>
-          )}
+          {activeNav === "Dashboard" && <StaffSalaryDashboard />}
           {activeNav === "Profile" && <StaffProfilePage />}
+          {activeNav === "Services" && (
+            <>
+              <h2 style={{ fontSize: "24px", fontWeight: "bold" }}></h2>
+              <StaffServicesDisplay />
+            </>
+          )}
+          {activeNav === "Salary" && (
+            <>
+              <h2 style={{ fontSize: "24px", fontWeight: "bold" }}>Salary</h2>
+              <StaffProfileWithSalary />
+            </>
+          )}
           {activeNav === "Appointments" && (
             <h2 style={{ fontSize: "24px", fontWeight: "bold" }}>Appointments</h2>
           )}
-          {activeNav === "Services" && (
-            <h2 style={{ fontSize: "24px", fontWeight: "bold" }}>Services</h2>
-          )}
+          
         </div>
       </div>
     </div>

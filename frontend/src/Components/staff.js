@@ -179,8 +179,8 @@ const StaffContent = () => {
       </div>
 
       {/* Staff List */}
-      <div>
-        <div style={{ display: "flex", fontWeight: "bold", padding: "10px 0", borderBottom: "1px solid #ccc" }}>
+      <div style={{ background: "#fff" }}>
+        <div style={{ background: "#8d73d6", color: "#fff", display: "flex", fontWeight: "bold", padding: "10px " }}>
           <div style={{ flex: 1 }}>Name</div>
           <div style={{ flex: 1 }}>Email</div>
           <div style={{ width: "120px" }}>Actions</div>

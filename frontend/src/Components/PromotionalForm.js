@@ -158,7 +158,7 @@ const styles = {
   },
   actions: { display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', marginTop: '1rem' },
   cancelBtn: {
-    backgroundColor: '#e53e3e',
+    backgroundColor: '#374151',
     color: '#fff',
     padding: '0.5rem 1.5rem',
     borderRadius: '0.75rem',

@@ -84,17 +84,17 @@ const AppointmentsContent = () => {
               boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
               minWidth: '900px'
             }}>
-              <thead>
-                <tr style={{ backgroundColor: '#f7fafc' }}>
-                  <th style={{ padding: '12px', textAlign: 'left' }}>ID</th>
-                  <th style={{ padding: '12px', textAlign: 'left' }}>Client</th>
-                  <th style={{ padding: '12px', textAlign: 'left' }}>Service ID</th>
-                  <th style={{ padding: '12px', textAlign: 'left' }}>Date</th>
-                  <th style={{ padding: '12px', textAlign: 'left' }}>Time</th>
-                  <th style={{ padding: '12px', textAlign: 'left' }}>Status</th>
-                  <th style={{ padding: '12px', textAlign: 'left' }}>Staff</th>
-                  <th style={{ padding: '12px', textAlign: 'left' }}>Assign</th>
-                  <th style={{ padding: '12px', textAlign: 'left' }}>Actions</th>
+              <thead style={{ background: "#8d73d6", color: "#fff" }}>
+                <tr style={{ background: "#8d73d6", color: "#fff" }}>
+                  <th style={{ padding: "10px", border: "1px solid #ddd" }}>ID</th>
+                  <th style={{ padding: "10px", border: "1px solid #ddd" }}>Client</th>
+                  <th style={{ padding: "10px", border: "1px solid #ddd" }}>Service ID</th>
+                  <th style={{ padding: "10px", border: "1px solid #ddd" }}>Date</th>
+                  <th style={{ padding: "10px", border: "1px solid #ddd" }}>Time</th>
+                  <th style={{ padding: "10px", border: "1px solid #ddd" }}>Status</th>
+                  <th style={{ padding: "10px", border: "1px solid #ddd" }}>Staff</th>
+                  <th style={{ padding: "10px", border: "1px solid #ddd" }}>Assign</th>
+                  <th style={{ padding: "10px", border: "1px solid #ddd" }}>Actions</th>
                 </tr>
               </thead>
               <tbody>
