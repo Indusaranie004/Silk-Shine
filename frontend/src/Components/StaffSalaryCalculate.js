@@ -76,7 +76,7 @@ const StaffSalaryCalculate = () => {
           <input type="number" name="epfPercentage" value={formData.epfPercentage} onChange={handleChange} placeholder="EPF %" style={styles.input} required />
           <input type="number" name="month" value={formData.month} onChange={handleChange} placeholder="Month (1-12)" style={styles.input} min="1" max="12" required />
           <input type="number" name="year" value={formData.year} onChange={handleChange} placeholder="Year" style={styles.input} required />
-          <textarea name="notes" value={formData.notes} onChange={handleChange} placeholder="Notes" style={styles.textarea} />
+          <textarea name="notes" value={formData.notes} onChange={handleChange} placeholder="Name" style={styles.textarea} />
 
           {/* Display Total Salary */}
           <div style={styles.totalSalary}>
