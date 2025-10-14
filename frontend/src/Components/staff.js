@@ -13,6 +13,10 @@ const StaffContent = () => {
   const [error, setError] = useState(null)
   const [filteredStaff, setFilteredStaff] = useState([])
 
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1)
+  const rowsPerPage = 5
+
   // 🔹 Update form states
   const [showUpdateForm, setShowUpdateForm] = useState(false)
   const [currentStaff, setCurrentStaff] = useState(null)
@@ -34,6 +38,7 @@ const StaffContent = () => {
         member.email?.toLowerCase().includes(searchTerm.toLowerCase())
     )
     setFilteredStaff(filtered)
+    setCurrentPage(1) // Reset to first page on search
   }, [searchTerm, staff])
 
   const fetchStaff = async () => {
@@ -111,6 +116,12 @@ const StaffContent = () => {
     return <div style={{ padding: "40px", textAlign: "center" }}>Loading staff members...</div>
   }
 
+  // 🔹 Pagination logic
+  const indexOfLastRow = currentPage * rowsPerPage
+  const indexOfFirstRow = indexOfLastRow - rowsPerPage
+  const currentRows = filteredStaff.slice(indexOfFirstRow, indexOfLastRow)
+  const totalPages = Math.ceil(filteredStaff.length / rowsPerPage)
+
   return (
     <div style={{ padding: "20px" }}>
       <h1 style={{ fontSize: "28px", marginBottom: "20px" }}>Staff Members</h1>
@@ -150,7 +161,7 @@ const StaffContent = () => {
 
         <button
           style={{
-            backgroundColor: "#4a90e2",
+            backgroundColor: "#8b5cf6",
             color: "white",
             padding: "10px 18px",
             border: "none",
@@ -161,8 +172,6 @@ const StaffContent = () => {
             whiteSpace: "nowrap",
             transition: "background 0.3s ease",
           }}
-          onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#357abd")}
-          onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#4a90e2")}
           onClick={() => navigate("/staffregister")}
         >
           Register New Staff
@@ -170,21 +179,21 @@ const StaffContent = () => {
       </div>
 
       {/* Staff List */}
-      <div>
-        <div style={{ display: "flex", fontWeight: "bold", padding: "10px 0", borderBottom: "1px solid #ccc" }}>
+      <div style={{ background: "#fff" }}>
+        <div style={{ background: "#8d73d6", color: "#fff", display: "flex", fontWeight: "bold", padding: "10px " }}>
           <div style={{ flex: 1 }}>Name</div>
           <div style={{ flex: 1 }}>Email</div>
           <div style={{ width: "120px" }}>Actions</div>
         </div>
 
-        {filteredStaff.length === 0 ? (
+        {currentRows.length === 0 ? (
           <div style={{ padding: "20px", textAlign: "center", color: "#666" }}>
             {searchTerm
               ? "No staff members found matching your search."
               : "No staff members available."}
           </div>
         ) : (
-          filteredStaff.map((member) => (
+          currentRows.map((member) => (
             <div
               key={member.userId}
               style={{
@@ -204,23 +213,11 @@ const StaffContent = () => {
                     background: "none",
                     border: "none",
                     cursor: "pointer",
-                    color: "#3182ce",
+                    color: "#8b5cf6",
                   }}
                   title="Edit staff member"
                 >
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M12 20h9"></path>
-                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                  </svg>
+                  ✏️
                 </button>
 
                 {/* 🗑️ Delete button */}
@@ -234,27 +231,37 @@ const StaffContent = () => {
                   }}
                   title="Delete staff member"
                 >
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <polyline points="3 6 5 6 21 6"></polyline>
-                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                    <line x1="10" y1="11" x2="10" y2="17"></line>
-                    <line x1="14" y1="11" x2="14" y2="17"></line>
-                  </svg>
+                  🗑️
                 </button>
               </div>
             </div>
           ))
         )}
       </div>
+
+      {/* 🔹 Pagination Buttons */}
+      {totalPages > 1 && (
+        <div style={{ marginTop: "20px", display: "flex", justifyContent: "center", gap: "5px" }}>
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              style={{
+                padding: "6px 12px",
+                borderRadius: "4px",
+                border: "none",
+                cursor: "pointer",
+                backgroundColor: currentPage === page ? "#8b5cf6" : "#f3f4f6",
+                color: currentPage === page ? "#fff" : "#374151",
+                fontWeight: "600",
+                transition: 'all 0.3s ease'
+              }}
+            >
+              {page}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* 🔹 Popup Update Form */}
       {showUpdateForm && (
@@ -336,7 +343,7 @@ const StaffContent = () => {
                 <button
                   type="submit"
                   style={{
-                    backgroundColor: "#4a90e2",
+                    backgroundColor: "#8b5cf3",
                     color: "white",
                     padding: "8px 14px",
                     border: "none",

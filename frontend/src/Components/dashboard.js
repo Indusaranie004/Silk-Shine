@@ -6,6 +6,12 @@ import Logo from "../assets/images/Logo.png";
 import CustomersContent from './customer'
 import StaffContent from "./staff";
 import ServicesContent from "./services";
+import AppointmentsContent from "./appointments";
+import AllPayments from "./AllPayments";
+import PromotionsTable from "./PromotionsTable";
+import AllContact from "./AllContact";
+import FinanceDashboard from "./FinaceDashboard";
+import StaffSalaryTable from "./StaffSalaryTable";
 
 
 function Dashboard() {
@@ -63,13 +69,15 @@ function Dashboard() {
 
   // Navigation items
   const navItems = [
-    { name: "Dashboard", route: "/dashboard", action: "navigate" },
+    { name: "Dashboard", route: "/finance-dashboard", action: "navigate" },
     { name: "Customers", route: "/customers", action: "navigate" },
     { name: "Staff", route: "/staff", action: "navigate" },
     { name: "Services", route: "/services", action: "navigate" },
     { name: "Appointments", route: "/appointments", action: "navigate" },
-    { name: "Finance", route: "/finance", action: "navigate" },
-    { name: "Activity Log", route: "/activity-log", action: "navigate" },
+    { name: "Payments", route: "/all-payments", action: "navigate" },
+    { name: "Promotions", route: "/promotions/all", action: "navigate" },
+    { name: "Contact Us", route: "/all-contacts", action: "navigate" },
+    { name: "Staff Salary", route: "/staff-salaries", action: "navigate" },
     { name: "Work Allocation", route: "/work-allocation", action: "navigate" }
     
   ]
@@ -171,13 +179,17 @@ function Dashboard() {
         {/* Main Content */}
         <div style={mainContentStyle}>
           {activeNav === "Dashboard" && (
-            <h1 style={{ fontSize: "32px", fontWeight: "bold", color: "#2d3748" }}>
-              Dashboard
-            </h1>
+            <FinanceDashboard />
           )}
+          
           {activeNav === "Customers" && <CustomersContent />}
           {activeNav === "Staff" && <StaffContent />}
           {activeNav === "Services" && <ServicesContent />}
+           {activeNav === "Appointments" && <AppointmentsContent />}{/* ← ADD THIS */}
+           {activeNav === "Payments" && <AllPayments />}
+           {activeNav === "Promotions" && <PromotionsTable />}
+            {activeNav === "Contact Us" && <AllContact />}
+            {activeNav === "Staff Salary" && <StaffSalaryTable />}
 
         </div>
       </div>

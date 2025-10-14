@@ -49,10 +49,14 @@ export default function Navigation({ showLogout = true }) {
 
         {/* Navigation Links */}
         <Flex align="center" gap={25}>
-          <Link href="/home" className="nav-link">
+          <Link href={showLogout ? "/Home" : "/"}
+          className="nav-link"
+          >
             Home
           </Link>
-          <Link href="/about" className="nav-link">
+          <Link href={showLogout ? "/about" : "/guest-about"}
+          className="nav-link"
+          >
             About
           </Link>
           <Link
@@ -61,10 +65,11 @@ export default function Navigation({ showLogout = true }) {
           >
             Services
           </Link>
-          <Link href="/portfolio" className="nav-link">
+          {/*<Link href="/portfolio" className="nav-link">
             Portfolio
-          </Link>
-          <Link href="/contact" className="nav-link">
+          </Link> */}
+          <Link href={showLogout ? "/contact-us" : "/guest-contact-us"} 
+          className="nav-link">
             Contact
           </Link>
 
@@ -86,7 +91,7 @@ export default function Navigation({ showLogout = true }) {
             bg="black"
             color="white"
             textDecoration="none"
-            _hover={{ bg: "#8b5cf6", color: "white", textDecoration: "none" }}
+            _hover={{ bg: "#0a0a0ae2", color: "white", textDecoration: "none" }}
           >
             Logout
           </Button>

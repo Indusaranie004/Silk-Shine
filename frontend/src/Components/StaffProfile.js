@@ -25,15 +25,57 @@ const StaffProfilePage = () => {
   if (!staff) return <p>No staff profile found.</p>;
 
   return (
-    <div style={{ maxWidth: "500px", margin: "20px auto", padding: "20px", border: "1px solid #ddd", borderRadius: "12px" }}>
-      <h2>👤 Staff Profile</h2>
-      <p><strong>User ID:</strong> {staff.userId}</p>
-      <p><strong>Name:</strong> {staff.name}</p>
-      <p><strong>Email:</strong> {staff.email}</p>
-      <p><strong>Role:</strong> {staff.role}</p>
-      <p><strong>Verified:</strong> {staff.isAccountVerified ? "✅ Yes" : "❌ No"}</p>
-      <p><strong>Created At:</strong> {new Date(staff.createdAt).toLocaleString()}</p>
-      <p><strong>Updated At:</strong> {new Date(staff.updatedAt).toLocaleString()}</p>
+    <div style={{
+      maxWidth: "500px",
+      margin: "40px auto",
+      padding: "30px",
+      borderRadius: "15px",
+      background: "linear-gradient(145deg, #f0f4ff , #8d73d6 )",
+      boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+      fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+    }}>
+      <h2 style={{ textAlign: "center", marginBottom: "20px", color: "#8d73d6" }}>
+        👤 Staff Profile
+      </h2>
+
+      {/*}
+      <div style={{ marginBottom: "12px", display: "flex", justifyContent: "space-between" }}>
+        <span style={{ fontWeight: "600", color: "#8d73d6" }}>User ID:</span>
+        <span>{staff.userId}</span>
+      </div> */}
+
+      <div style={{ marginBottom: "12px", display: "flex", justifyContent: "space-between" }}>
+        <span style={{ fontWeight: "600", color: "#8d73d6" }}>Name:</span>
+        <span>{staff.name}</span>
+      </div>
+
+      <div style={{ marginBottom: "12px", display: "flex", justifyContent: "space-between" }}>
+        <span style={{ fontWeight: "600", color: "#8d73d6" }}>Email:</span>
+        <span>{staff.email}</span>
+      </div>
+
+      <div style={{ marginBottom: "12px", display: "flex", justifyContent: "space-between" }}>
+        <span style={{ fontWeight: "600", color: "#8d73d6" }}>Role:</span>
+        <span>{staff.role}</span>
+      </div>
+
+    {/*}
+      <div style={{ marginBottom: "12px", display: "flex", justifyContent: "space-between" }}>
+        <span style={{ fontWeight: "600", color: "#8d73d6" }}>Verified:</span>
+        <span style={{ color: staff.isAccountVerified ? "green" : "red" }}>
+          {staff.isAccountVerified ? "✅ Yes" : "❌ No"}
+        </span>
+      </div> */}
+
+      <div style={{ marginBottom: "12px", display: "flex", justifyContent: "space-between" }}>
+        <span style={{ fontWeight: "600", color: "#8d73d6" }}>Created At:</span>
+        <span>{new Date(staff.createdAt).toLocaleString()}</span>
+      </div>
+
+      <div style={{ marginBottom: "12px", display: "flex", justifyContent: "space-between" }}>
+        <span style={{ fontWeight: "600", color: "#8d73d6" }}>Updated At:</span>
+        <span>{new Date(staff.updatedAt).toLocaleString()}</span>
+      </div>
     </div>
   );
 };

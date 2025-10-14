@@ -19,4 +19,15 @@ public interface StaffAvailabilityRepository extends JpaRepository<StaffAvailabi
 
     @Query("SELECT sa FROM StaffAvailability sa WHERE sa.staff.id = :staffId AND sa.weeklySchedule.weekStartDate >= :weekStart ORDER BY sa.weeklySchedule.weekStartDate DESC, sa.dayOfWeek ASC")
     List<StaffAvailability> findRecentSchedulesByStaff(@Param("staffId") Long staffId, @Param("weekStart") LocalDate weekStart);
+
+    @Query("SELECT sa FROM StaffAvailability sa WHERE sa.weeklySchedule.weekStartDate = :weekStart AND sa.dayOfWeek = :dayOfWeek")
+    List<StaffAvailability> findByWeeklySchedule_WeekStartDateAndDayOfWeek(
+            @Param("weekStart") LocalDate weekStart,
+            @Param("dayOfWeek") Integer dayOfWeek
+    );
+
+
+
+
+
 }
