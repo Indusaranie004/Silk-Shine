@@ -37,7 +37,7 @@ const AllContact = () => {
       alert("✅ Contact deleted successfully");
     } catch (err) {
       console.error(err);
-      alert("❌ Failed to delete contact");
+      alert("❌ Failed to delete contact");  // Failed Message
     }
   };
 
